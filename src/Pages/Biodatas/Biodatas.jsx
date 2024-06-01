@@ -6,7 +6,7 @@ const Biodatas = () => {
   const { data: allBio = [] } = useQuery({
     queryKey: ["allBio"],
     queryFn: async () => {
-      const res = await axios.get("/all_member.json");
+      const res = await axios.get("http://localhost:5000/members");
       return res.data;
     },
   });
