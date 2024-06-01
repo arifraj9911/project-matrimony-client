@@ -5,6 +5,7 @@ import Login from "../Pages/Shared/Login/Login";
 import Register from "../Pages/Shared/Register/Register";
 import Biodatas from "../Pages/Biodatas/Biodatas";
 import ProfileDetails from "../Pages/ProfileDetails/ProfileDetails";
+import Checkout from "../Pages/CheckOut/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path:'/profileDetails/:id',
         element:<ProfileDetails></ProfileDetails>
+      },
+      {
+        path:'/checkout/:id',
+        element:<Checkout></Checkout>
       },
       {
         path: "/login",

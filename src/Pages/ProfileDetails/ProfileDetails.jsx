@@ -8,7 +8,7 @@ import {
   PiBuildingApartmentLight,
   PiGenderIntersexLight,
 } from "react-icons/pi";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RelatedProfileCard from "./RelatedProfileCard";
 
 const ProfileDetails = () => {
@@ -85,8 +85,9 @@ const ProfileDetails = () => {
             sint ut voluptatum fugiat quibusdam! Iure est deserunt adipisci!
           </p>
           <div className="flex gap-6 mt-10">
-            <Button>Add To Favorite</Button>
-            <Button>Request Contact Information</Button>
+            
+            <Link to=''><Button >Add to Favorite</Button></Link>
+            <Link to={`/checkout/${biodata_id}`}><Button >Request Contact Information</Button></Link>
           </div>
         </div>
       </div>
