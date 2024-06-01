@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Premium_Members from "../Premium_Members/Premium_Members";
 
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
         <div >
             
             <Banner></Banner>
-            
+            <Premium_Members></Premium_Members>
         </div>
     );
 };

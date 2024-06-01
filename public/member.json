@@ -1,0 +1,51 @@
+[
+    {
+      "biodata_id": 1,
+      "biodata_type": "Male",
+      "profile_image": "https://i.ibb.co/v3k59wB/15885.jpg",
+      "permanent_division_name": "Dhaka",
+      "age": 23,
+      "occupation": "Student"
+    },
+    {
+      "biodata_id": 2,
+      "biodata_type": "Female",
+      "profile_image": "https://i.ibb.co/LSWBSYd/104422.jpg",
+      "permanent_division_name": "Chattagram",
+      "age": 45,
+      "occupation": "Housewife"
+    },
+    {
+      "biodata_id": 3,
+      "biodata_type": "Male",
+      "profile_image": "https://i.ibb.co/RNktRtt/161962.jpg",
+      "permanent_division_name": "Rangpur",
+      "age": 30,
+      "occupation": "Job"
+    },
+    {
+      "biodata_id": 4,
+      "biodata_type": "Female",
+      "profile_image": "https://i.ibb.co/fCjbR7x/portrait-young-woman-smiling-23-2149375011.jpg",
+      "permanent_division_name": "Barisal",
+      "age": 23,
+      "occupation": "Student"
+    },
+    {
+      "biodata_id": 5,
+      "biodata_type": "Male",
+      "profile_image": "https://i.ibb.co/y04DXkD/autor-2.jpg",
+      "permanent_division_name": "Khulna",
+      "age": 45,
+      "occupation": "Job"
+    },
+    {
+      "biodata_id": 6,
+      "biodata_type": "Female",
+      "profile_image": "https://i.ibb.co/ScHFk1x/athor-1.jpg",
+      "permanent_division_name": "Sylhet",
+      "age": 30,
+      "occupation": "Housewife"
+    }
+  ]
+  
