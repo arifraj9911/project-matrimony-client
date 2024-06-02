@@ -8,6 +8,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  let isAdmin = false;
 
   const handleLogOut = ()=>{
     // setLoading(true);
@@ -126,15 +127,28 @@ const Header = () => {
               >
                 Contact Us
               </Link>
+              {
+                user && !isAdmin && 
+                <Link
+                to='/dashboard/userHome'
+                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                Dashboard
+              </Link>
+              },
+              {
+                user && isAdmin && 
+                <Link
+                to='/dashboard/adminHome'
+                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                Dashboard
+              </Link>
+              }
             </div>
 
             <div className="flex items-center mt-4 lg:mt-0">
-              <button
-                className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
-                aria-label="show notifications"
-              >
-                
-              </button>
+              
 
               <button
                 type="button"
