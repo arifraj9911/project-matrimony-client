@@ -2,7 +2,7 @@ import { CiLogout } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
 import { GrDocumentText } from "react-icons/gr";
 import { IoDocumentsOutline } from "react-icons/io5";
-import { RiContactsBook3Line } from "react-icons/ri";
+import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -13,11 +13,11 @@ const Dashboard = () => {
         <div className="mb-16  font-bold w-3/4 mx-auto flex flex-col  items-start mt-12">
           <h2 className="text-3xl uppercase mb-2">Love Nest</h2>
           <p className="font-normal">Find your soulmate</p>
-          <ul className="space-y-4  uppercase font-semibold w-full mt-8  flex flex-col items-start">
+          <ul className="space-y-5  uppercase font-semibold w-full mt-8  flex flex-col items-start">
             {!isAdmin ? (
               <>
                 <li className="flex items-center gap-2 justify-center">
-                  <FiEdit />
+                <RiHomeWifiLine />
                   <NavLink to="/dashboard/userHome">
                     <span>User Home</span>
                   </NavLink>
@@ -50,37 +50,10 @@ const Dashboard = () => {
                 </li>
               </>
             ) : (
-              // <>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <AiFillHome />
-              //     <NavLink to="/dashboard/userHome">
-              //       <span>User Home</span>
-              //     </NavLink>
-              //   </li>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <SlCalender />
-              //     <NavLink to="/dashboard/reservation">Reservation</NavLink>
-              //   </li>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <MdOutlinePayment />
-              //     <NavLink to="/dashboard/payment">Payment History</NavLink>
-              //   </li>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <FaCartShopping />
-              //     <NavLink to="/dashboard/cart">My Cart({cart?.length})</NavLink>
-              //   </li>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <MdRateReview />
-              //     <NavLink to="/dashboard/review">Add Review</NavLink>
-              //   </li>
-              //   <li className="flex items-center gap-2 justify-center">
-              //     <TbBrandBooking />
-              //     <NavLink to="/dashboard/paymentHistory">Payment History</NavLink>
-              //   </li>
-              // </>
+              
               <>
                 <li className="flex items-center gap-2 justify-center">
-                  <FiEdit />
+                <RiHomeWifiLine />
                   <NavLink to="/dashboard/adminHome">
                     <span>Admin Dashboard</span>
                   </NavLink>
@@ -111,7 +84,6 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="flex-1 p-12">
-        dashboard content
         <Outlet></Outlet>
       </div>
     </div>

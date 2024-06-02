@@ -59,7 +59,8 @@ export const router = createBrowserRouter([
       },
       {
         path:'/dashboard/editBiodata',
-        element:<EditBiodata></EditBiodata>
+        element:<EditBiodata></EditBiodata>,
+        loader:()=>fetch('http://localhost:5000/membersCount')
       },
       {
         path:'/dashboard/viewBiodata',
