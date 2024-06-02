@@ -38,6 +38,17 @@ const ProfileDetails = () => {
     return <p>Loading...</p>;
   }
 
+  const handleAddFavorite = (member)=>{
+    axios.post('http://localhost:5000/favoriteBiodata',member)
+    .then(res=>{
+      // console.log(res.data);
+      if(res.data.insertedId){
+        alert('Biodata added in the favorite list')
+      }
+    })
+    .catch(err=>console.log(err.message))
+  }
+
   const {
     biodata_id,
     biodata_type,
@@ -47,7 +58,9 @@ const ProfileDetails = () => {
     occupation,
   } = member[0];
 
-  console.log(similarMember);
+
+
+  // console.log(similarMember);
   return (
     <div className=" max-w-screen-xl mx-auto my-20">
       <div className="flex gap-6">
@@ -86,7 +99,7 @@ const ProfileDetails = () => {
           </p>
           <div className="flex gap-6 mt-10">
             
-            <Link to=''><Button >Add to Favorite</Button></Link>
+            <Link to=''><Button onClick={()=>handleAddFavorite(member[0])}>Add to Favorite</Button></Link>
             <Link to={`/checkout/${biodata_id}`}><Button >Request Contact Information</Button></Link>
           </div>
         </div>
