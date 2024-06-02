@@ -6,7 +6,7 @@ import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  let isAdmin = false;
+  let isAdmin = true;
   return (
     <div className="flex gap-6">
       <div className="w-96 bg-[#FFF5E0] min-h-screen text-center">

@@ -5,7 +5,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser,updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
@@ -17,6 +17,13 @@ const Register = () => {
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
+
+        updateUserProfile(data.name,data.photo)
+        .then(()=>{
+          console.log('user updated');
+        })
+        .catch(err=>console.log(err.message))
+
         reset();
         navigate("/");
       })

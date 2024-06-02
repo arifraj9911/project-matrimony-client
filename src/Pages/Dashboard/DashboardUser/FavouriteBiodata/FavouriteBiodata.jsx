@@ -2,25 +2,58 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Table } from "flowbite-react";
 import { IoRemoveCircleSharp } from "react-icons/io5";
-
+import Swal from "sweetalert2";
 
 const FavouriteBiodata = () => {
-
-  const {data:favoriteMember = [],isPending}=useQuery({
-    queryKey:['favoriteMember'],
-    queryFn:async()=>{
-      const res = await axios.get('http://localhost:5000/favoriteBiodata')
+  const {
+    data: favoriteMember = [],
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["favoriteMember"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/favoriteBiodata");
       return res.data;
-    }
+    },
   });
 
-  if(isPending){
-    return <p>Loading...</p>
+  const handleDeleteBiodata = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/favoriteBiodata/${id}`)
+          .then((res) => {
+            // console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
+  if (isPending) {
+    return <p>Loading...</p>;
   }
 
   return (
     <div>
-      <h2 className="text-2xl">My Favorite Biodatas: {favoriteMember?.length}</h2>
+      <h2 className="text-2xl">
+        My Favorite Biodatas: {favoriteMember?.length}
+      </h2>
       <div className="overflow-x-auto my-12">
         <Table hoverable>
           <Table.Head>
@@ -34,21 +67,24 @@ const FavouriteBiodata = () => {
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {
-              favoriteMember?.map(member=><Table.Row key={member.biodata_id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              
-              <Table.Cell>{member.biodata_id}</Table.Cell>
-              <Table.Cell>{member.name}</Table.Cell>
-              <Table.Cell>{member.permanent_division_name}</Table.Cell>
-              <Table.Cell>{member.occupation}</Table.Cell>
-              <Table.Cell>
-              <button>
-              <IoRemoveCircleSharp className="text-3xl text-red-500"/>
-              </button>
-              </Table.Cell>
-              
-            </Table.Row>)
-            }
+            {favoriteMember?.map((member) => (
+              <Table.Row
+                key={member.biodata_id}
+                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              >
+                <Table.Cell>{member.biodata_id}</Table.Cell>
+                <Table.Cell>{member.name}</Table.Cell>
+                <Table.Cell>{member.permanent_division_name}</Table.Cell>
+                <Table.Cell>{member.occupation}</Table.Cell>
+                <Table.Cell>
+                  <button
+                    onClick={() => handleDeleteBiodata(member.biodata_id)}
+                  >
+                    <IoRemoveCircleSharp className="text-3xl text-red-500" />
+                  </button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
           </Table.Body>
         </Table>
       </div>

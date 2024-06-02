@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
     const {signIn} = useContext(AuthContext);
@@ -17,6 +18,18 @@ const Login = () => {
     signIn(email,password)
     .then(res=>{
         console.log(res.user);
+
+        const userInfo = {
+          name:res.user?.displayName,
+          email:res.user?.email
+        }
+
+        axios.post('http://localhost:5000/users',userInfo)
+        .then(res=>{
+          console.log(res.data)
+        })
+        .catch(err=>console.log(err.message))
+
         navigate('/');
     })
     .catch(err=>console.log(err.message))

@@ -8,7 +8,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  let isAdmin = false;
+  let isAdmin = true;
 
   const handleLogOut = ()=>{
     // setLoading(true);
