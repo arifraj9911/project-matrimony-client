@@ -55,6 +55,10 @@ const EditBiodata = () => {
     const createdTime = {
       time: new Date().toTimeString(),
     };
+    const expected_gender = form.expected_gender.value;
+    const expected_age = form.expected_age.value;
+    const expected_height = form.expected_height.value;
+    const expected_weight = form.expected_weight.value;
     const biodata_id = lastId + 1;
     const profile_image = form.image.value;
 
@@ -76,6 +80,10 @@ const EditBiodata = () => {
       createdTime,
       biodata_id,
       profile_image,
+      expected_age,
+      expected_gender,
+      expected_height,
+      expected_weight,
     };
 
     // console.log(profileBiodata);
@@ -295,7 +303,7 @@ const EditBiodata = () => {
                   <Label value="Height(inch)" />
                 </div>
                 <Select name="expected_height" required>
-                  <option>4.4 - 5.2 </option>
+                  <option>4.4-5.2 </option>
                   <option>5.3-5.10</option>
                   <option>5.4-6.4</option>
                 </Select>
