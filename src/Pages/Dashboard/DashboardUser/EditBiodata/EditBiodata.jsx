@@ -8,14 +8,29 @@ import {
 } from "flowbite-react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../provider/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const EditBiodata = () => {
   const { user } = useContext(AuthContext);
-  const { count } = useLoaderData();
+  //   const { count } = useLoaderData();
 
-  // console.log(count);
-  let lastId = count;
+  const {
+    data: count = 0,
+    refetch,
+    isPending,
+  } = useQuery({
+    queryKey: ["count"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/membersCount");
+      return res.data;
+    },
+  });
+
+  console.log(count.count);
+
+  let lastId = count.count;
 
   const handleEditProfile = (e) => {
     // setLastId(lastId+1)
@@ -27,7 +42,7 @@ const EditBiodata = () => {
     const email = form.email.value;
     const phone = form.phone.value;
     const biodata_type = form.gender.value;
-    const age = form.age.value;
+    const age = parseInt(form.age.value);
     const date_of_birth = form.date.value;
     const occupation = form.occupation.value;
     const height = form.height.value;
@@ -63,8 +78,23 @@ const EditBiodata = () => {
       profile_image,
     };
 
-    console.log(profileBiodata);
+    // console.log(profileBiodata);
+
+    axios
+      .post("http://localhost:5000/members", profileBiodata)
+      .then((res) => {
+        console.log("profile added", res.data);
+        if (res.data.insertedId) {
+          alert("profile added successfully");
+          refetch();
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
+
+  if (isPending) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="w-5/6 shadow p-10">
