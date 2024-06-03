@@ -11,6 +11,7 @@ import { AuthContext } from "../../../../provider/AuthProvider";
 // import { useLoaderData } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 // image upload api
 const imageHostingKey = "3951e23defb40e6373eb171e3b8e6b24";
@@ -121,6 +122,12 @@ const EditBiodata = () => {
             if (res.data.insertedId) {
               alert("profile added successfully");
               refetch();
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Failed",
+                text: `${res.data.message}`,
+              });
             }
           })
           .catch((err) => console.log(err.message));
