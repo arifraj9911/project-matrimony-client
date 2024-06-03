@@ -1,15 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Table } from "flowbite-react";
+import { IoRemoveCircleSharp } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const MyContactRequest = () => {
-  const { data: myRequest = [], isPending } = useQuery({
+  const {
+    data: myRequest = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["myRequest"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/myRequestContact");
       return res.data;
     },
   });
+
+  const handleDeleteRequest = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/myRequestContact/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
+      }
+    });
+  };
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -26,6 +59,7 @@ const MyContactRequest = () => {
             <Table.HeadCell>Contact Email</Table.HeadCell>
             <Table.HeadCell>Mobile Number</Table.HeadCell>
             <Table.HeadCell>Status</Table.HeadCell>
+            <Table.HeadCell>Action</Table.HeadCell>
             <Table.HeadCell>
               <span className="sr-only">Edit</span>
             </Table.HeadCell>
@@ -50,6 +84,13 @@ const MyContactRequest = () => {
                 </Table.Cell>
                 <Table.Cell>
                   {request?.status === "approved" ? "Approved" : "Pending"}
+                </Table.Cell>
+                <Table.Cell>
+                  <button
+                    onClick={() => handleDeleteRequest(request.biodata_id)}
+                  >
+                    <IoRemoveCircleSharp className="text-3xl text-red-500" />
+                  </button>
                 </Table.Cell>
               </Table.Row>
             ))}
