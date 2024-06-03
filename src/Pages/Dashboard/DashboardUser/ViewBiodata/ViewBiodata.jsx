@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Avatar, Button } from "flowbite-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
@@ -24,7 +24,9 @@ const ViewBiodata = () => {
     },
   });
 
-  console.log(viewMembers[0]);
+  useEffect(() => {}, []);
+
+  // console.log(viewMembers[0]);sa
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -56,7 +58,7 @@ const ViewBiodata = () => {
   // console.log(biodata_id)
 
   const handleMakePremium = (id) => {
-    // console.log(viewMembers[0])
+    // console.log(requestPremium,id)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -67,6 +69,7 @@ const ViewBiodata = () => {
       confirmButtonText: "Yes, update!",
     }).then((result) => {
       if (result.isConfirmed) {
+        // make premium update
         axios
           .patch(`http://localhost:5000/initialAllMembers/premium/${id}`)
           .then((res) => {
@@ -81,6 +84,9 @@ const ViewBiodata = () => {
             }
           })
           .catch((err) => console.log(err.message));
+
+        // premium request send pending premium collection
+        // axios.post()
       }
     });
   };
@@ -106,11 +112,13 @@ const ViewBiodata = () => {
             </span>
           </div>
           <div>
-            {viewMembers[0]?.role === "premium" ? (
-              <Button>Pending</Button>
+            {viewMembers[0]?.status === "pending" ? (
+              "Pending"
+            ) : viewMembers[0]?.status === "premium" ? (
+              "Premium Member"
             ) : (
               <Button onClick={() => handleMakePremium(biodata_id)}>
-                Make Premium
+                Make Premium Request
               </Button>
             )}
           </div>

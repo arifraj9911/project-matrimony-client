@@ -132,7 +132,7 @@ const ManageUsers = () => {
                 <Table.Cell>{user.name}</Table.Cell>
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>
-                  {user?.status === "admin" ? (
+                  {user?.role === "admin" ? (
                     "Admin"
                   ) : (
                     <Button onClick={() => handleMakeAdmin(user)}>
@@ -141,7 +141,7 @@ const ManageUsers = () => {
                   )}
                 </Table.Cell>
                 <Table.Cell>
-                  {user?.role === "premium" ? (
+                  {user?.status === "premium" ? (
                     "Premium"
                   ) : (
                     <Button onClick={() => handleMakePremium(user)}>
