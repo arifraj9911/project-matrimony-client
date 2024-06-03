@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
+import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
+  const searchRef = useRef(null);
+  const [allUsers, setAllUsers] = useState([]);
   const {
     data: users = [],
     isPending,
@@ -15,6 +18,11 @@ const ManageUsers = () => {
       return res.data;
     },
   });
+
+  useEffect(() => {
+    // const searchText = searchRef.current.value;
+    setAllUsers(users);
+  }, [users]);
 
   const handleMakeAdmin = (user) => {
     Swal.fire({
@@ -71,13 +79,40 @@ const ManageUsers = () => {
     });
   };
 
+  const handleSearchUser = () => {
+    const searchText = searchRef.current.value;
+    axios
+      .get(`http://localhost:5000/userSearch?search=${searchText}`)
+      .then((res) => {
+        // console.log(res.data);
+        setAllUsers(res.data);
+      });
+  };
+
   if (isPending) {
     return <p>Loading...</p>;
   }
   return (
     <div>
-      <h2 className="text-2xl">Manage Users</h2>
-      <div className="overflow-x-auto my-12">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl">Manage Users</h2>
+        <div className="flex">
+          <input
+            ref={searchRef}
+            type="text"
+            className="py-2 px-3 border border-gray-200 rounded-lg rounded-r-none"
+            placeholder="username..."
+          />
+          <Button
+            onClick={handleSearchUser}
+            size="sm"
+            className="rounded-l-none"
+          >
+            Search
+          </Button>
+        </div>
+      </div>
+      <div className="overflow-x-auto my-8">
         <Table hoverable>
           <Table.Head>
             <Table.HeadCell>User Name</Table.HeadCell>
@@ -89,7 +124,7 @@ const ManageUsers = () => {
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {users?.map((user) => (
+            {allUsers?.map((user) => (
               <Table.Row
                 key={user._id}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
