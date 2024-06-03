@@ -3,10 +3,10 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
-const PaymentCheckout = ({setPaymentSuccess}) => {
+const PaymentCheckout = ({setPaymentSuccess,transactionId,setTransactionId}) => {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState("");
-  const [transactionId, setTransactionId] = useState("");
+//   const [transactionId, setTransactionId] = useState("");
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -21,7 +21,7 @@ const PaymentCheckout = ({setPaymentSuccess}) => {
         setClientSecret(res.data.clientSecret);
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [setClientSecret]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,6 +71,7 @@ const PaymentCheckout = ({setPaymentSuccess}) => {
         console.log("transaction Id:", paymentIntent.id);
         setTransactionId(paymentIntent.id);
         setPaymentSuccess(true);
+        elements.getElement(CardElement).clear();
       }
     }
   };
@@ -96,7 +97,7 @@ const PaymentCheckout = ({setPaymentSuccess}) => {
       <button
         className="bg-cyan-700 text-white py-2 mt-5 rounded-md px-6"
         type="submit"
-        disabled={!stripe || !clientSecret}
+        disabled={!stripe || !clientSecret }
       >
         Pay 
       </button>

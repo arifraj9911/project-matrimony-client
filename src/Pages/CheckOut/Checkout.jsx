@@ -5,6 +5,9 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentCheckout from "./PaymentCheckout";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const stripePromise = loadStripe(
   "pk_test_51PLRJ5IIzM9oJ9jxP2Jgraq9LtM8Ok8eCWW78a2ymbYMgs0Uh3mr7hQ6bql7zQcknZuAr9lTuavgdJPWPIWxHVMH00JrDRoZES"
@@ -15,6 +18,48 @@ const Checkout = () => {
   const { id } = useParams();
 
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+  // const [clientSecret, setClientSecret] = useState("");
+
+  const {
+    data: contactRequest = [],
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["contactRequest"],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:5000/contactRequest/${id}`);
+      // console.log(res.data)
+      return res.data;
+    },
+  });
+
+  // console.log(contactRequest)
+
+  const handleContactRequest = () => {
+    // e.preventDefault();
+
+    axios
+      .post("http://localhost:5000/contactRequestSend", contactRequest)
+      .then((res) => {
+        // console.log(res.data);
+        refetch();
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "contact request send for admin approval",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+  if (isPending) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="w-1/3 mx-auto my-20">
@@ -53,11 +98,17 @@ const Checkout = () => {
           <Elements stripe={stripePromise}>
             <PaymentCheckout
               setPaymentSuccess={setPaymentSuccess}
+              setTransactionId={setTransactionId}
+              transactionId={transactionId}
             ></PaymentCheckout>
           </Elements>
         </div>
 
-        <Button disabled={paymentSuccess === false} type="submit">
+        <Button
+          onClick={handleContactRequest}
+          disabled={paymentSuccess === false}
+          type="submit"
+        >
           Submit
         </Button>
       </div>
