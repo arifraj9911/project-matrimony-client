@@ -135,7 +135,7 @@ const Header = () => {
               >
                 Dashboard
               </Link>
-              },
+              }
               {
                 user && isAdmin && 
                 <Link

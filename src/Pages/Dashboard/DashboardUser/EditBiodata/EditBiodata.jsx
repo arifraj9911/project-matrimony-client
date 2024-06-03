@@ -6,15 +6,21 @@ import {
   Select,
   TextInput,
 } from "flowbite-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../../provider/AuthProvider";
 // import { useLoaderData } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
+// image upload api
+const imageHostingKey = "3951e23defb40e6373eb171e3b8e6b24";
+// const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
+
 const EditBiodata = () => {
   const { user } = useContext(AuthContext);
   //   const { count } = useLoaderData();
+  const [selectedFile, setSelectedFile] = useState(null);
+  // const [imageUrl,setImageUrl] = useState('');
 
   const {
     data: count = 0,
@@ -31,6 +37,10 @@ const EditBiodata = () => {
   console.log(count.count);
 
   let lastId = count.count;
+
+  const handleFileSelect = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
 
   const handleEditProfile = (e) => {
     // setLastId(lastId+1)
@@ -60,44 +70,105 @@ const EditBiodata = () => {
     const expected_height = form.expected_height.value;
     const expected_weight = form.expected_weight.value;
     const biodata_id = lastId + 1;
-    const profile_image = form.image.value;
+    // const profile_image = form.image.value;
 
-    const profileBiodata = {
-      name,
-      email,
-      phone,
-      biodata_type,
-      age,
-      date_of_birth,
-      occupation,
-      height,
-      weight,
-      father_name,
-      mother_name,
-      permanent_division_name,
-      present_division_name,
-      race,
-      createdTime,
-      biodata_id,
-      profile_image,
-      expected_age,
-      expected_gender,
-      expected_height,
-      expected_weight,
-    };
+    const formData = new FormData();
 
-    // console.log(profileBiodata);
+    formData.append("image", selectedFile);
 
     axios
-      .post("http://localhost:5000/members", profileBiodata)
-      .then((res) => {
-        console.log("profile added", res.data);
-        if (res.data.insertedId) {
-          alert("profile added successfully");
-          refetch();
-        }
+      .post("https://api.imgbb.com/1/upload", formData, {
+        params: {
+          key: imageHostingKey,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
-      .catch((err) => console.log(err.message));
+      .then((res) => {
+        // setImageUrl(res.data.data.url)
+
+        const profileBiodata = {
+          name,
+          email,
+          phone,
+          biodata_type,
+          age,
+          date_of_birth,
+          occupation,
+          height,
+          weight,
+          father_name,
+          mother_name,
+          permanent_division_name,
+          present_division_name,
+          race,
+          createdTime,
+          biodata_id,
+          profile_image: res.data.data.url,
+          expected_age,
+          expected_gender,
+          expected_height,
+          expected_weight,
+        };
+
+        // console.log(profileBiodata);
+
+        axios
+          .post("http://localhost:5000/members", profileBiodata)
+          .then((res) => {
+            console.log("profile added", res.data);
+            if (res.data.insertedId) {
+              alert("profile added successfully");
+              refetch();
+            }
+          })
+          .catch((err) => console.log(err.message));
+      });
+
+    // axios.post('http://localhost:5000/',imageHostingAPI,selectedFile,{
+    //   headers:{
+    //     "content-type": "multipart/form-data",
+    //   }
+    // })
+    // .then(res=>{
+    //   console.log(res.data)
+    // })
+
+    // const profileBiodata = {
+    //   name,
+    //   email,
+    //   phone,
+    //   biodata_type,
+    //   age,
+    //   date_of_birth,
+    //   occupation,
+    //   height,
+    //   weight,
+    //   father_name,
+    //   mother_name,
+    //   permanent_division_name,
+    //   present_division_name,
+    //   race,
+    //   createdTime,
+    //   biodata_id,
+    //   profile_image:imageUrl,
+    //   expected_age,
+    //   expected_gender,
+    //   expected_height,
+    //   expected_weight,
+    // };
+
+    // axios
+    //   .post("http://localhost:5000/members", profileBiodata)
+    //   .then((res) => {
+    //     console.log("profile added", res.data);
+    //     if (res.data.insertedId) {
+    //       alert("profile added successfully");
+    //       refetch();
+    //     }
+    //   })
+    //   .catch((err) => console.log(err.message));
   };
 
   if (isPending) {
@@ -260,7 +331,9 @@ const EditBiodata = () => {
                   <Label value="Upload Yor Photo" />
                 </div>
                 <FileInput
+                  onChange={handleFileSelect}
                   name="image"
+                  type="file"
                   id="file-upload-helper-text"
                   helperText="SVG, PNG, JPG or GIF (MAX. 800x400px)."
                 />
