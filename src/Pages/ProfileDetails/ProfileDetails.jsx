@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
 import {
@@ -10,15 +10,17 @@ import {
 } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import RelatedProfileCard from "./RelatedProfileCard";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const ProfileDetails = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [gender, setGender] = useState(null);
   const { data: member = [], isPending } = useQuery({
     queryKey: ["member", id],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/members/${id}`);
-      setGender(res.data[0].biodata_type);
+      setGender(res.data.biodata_type);
       return res.data;
     },
   });
@@ -34,20 +36,30 @@ const ProfileDetails = () => {
       },
     });
 
-  if (isPending || pendingSimilarMember) {
+  const { data: usersData = [], isPending: userPending } = useQuery({
+    queryKey: ["usersData", user?.email],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:5000/users/${user.email}`);
+      // console.log(res.data);
+      return res.data;
+    },
+  });
+
+  if (isPending || pendingSimilarMember || userPending) {
     return <p>Loading...</p>;
   }
 
-  const handleAddFavorite = (member)=>{
-    axios.post('http://localhost:5000/favoriteBiodata',member)
-    .then(res=>{
-      // console.log(res.data);
-      if(res.data.insertedId){
-        alert('Biodata added in the favorite list')
-      }
-    })
-    .catch(err=>console.log(err.message))
-  }
+  const handleAddFavorite = (member) => {
+    axios
+      .post("http://localhost:5000/favoriteBiodata", member)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.insertedId) {
+          alert("Biodata added in the favorite list");
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   const {
     biodata_id,
@@ -56,9 +68,7 @@ const ProfileDetails = () => {
     permanent_division_name,
     age,
     occupation,
-  } = member[0];
-
-
+  } = member;
 
   // console.log(similarMember);
   return (
@@ -89,7 +99,7 @@ const ProfileDetails = () => {
             </div>
           </div>
           <hr className="my-8" />
-          <p className="">
+          <p className="mb-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
             dolore nihil rerum. Explicabo, laudantium modi obcaecati nisi
             repudiandae perferendis in saepe maiores. Nulla id quis magnam earum
@@ -97,10 +107,31 @@ const ProfileDetails = () => {
             consequatur voluptatibus excepturi nisi nam quaerat exercitationem
             sint ut voluptatum fugiat quibusdam! Iure est deserunt adipisci!
           </p>
+          <div>
+            {usersData?.status === "premium" && (
+              <p className="flex flex-col font-semibold gap-3">
+                <span>
+                  Contact Email:{" "}
+                  {member?.email ? member.email : "no email found"}
+                </span>
+                <span>
+                  Mobile Number:{" "}
+                  {member?.phone ? member.phone : "no phone found"}
+                </span>
+              </p>
+            )}
+          </div>
           <div className="flex gap-6 mt-10">
-            
-            <Link to=''><Button onClick={()=>handleAddFavorite(member[0])}>Add to Favorite</Button></Link>
-            <Link to={`/checkout/${biodata_id}`}><Button >Request Contact Information</Button></Link>
+            <Link to="">
+              <Button onClick={() => handleAddFavorite(member)}>
+                Add to Favorite
+              </Button>
+            </Link>
+            {usersData?.status !== "premium" && (
+              <Link to={`/checkout/${biodata_id}`}>
+                <Button>Request Contact Information</Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

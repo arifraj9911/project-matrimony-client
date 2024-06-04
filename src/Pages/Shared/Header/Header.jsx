@@ -48,7 +48,8 @@ const Header = () => {
                 src={logoNav}
                 alt="Logo"
               />
-              <h2 className="text-3xl">LoveNest</h2>
+              <h2 className="text-3xl mr-4">LoveNest</h2>
+              <span>{user?.email}</span>
             </Link>
 
             {/* Mobile menu button */}
