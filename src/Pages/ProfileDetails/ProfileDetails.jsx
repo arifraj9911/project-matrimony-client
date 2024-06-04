@@ -19,7 +19,11 @@ const ProfileDetails = () => {
   const { data: member = [], isPending } = useQuery({
     queryKey: ["member", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/members/${id}`);
+      const res = await axios.get(`http://localhost:5000/members/${id}`,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       setGender(res.data.biodata_type);
       return res.data;
     },
@@ -30,7 +34,11 @@ const ProfileDetails = () => {
       queryKey: ["similarMember", gender],
       queryFn: async () => {
         const res = await axios.get(
-          `http://localhost:5000/similarMembers?gender=${gender}`
+          `http://localhost:5000/similarMembers?gender=${gender}`,{
+            headers:{
+              authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+          }
         );
         return res.data;
       },
@@ -39,7 +47,11 @@ const ProfileDetails = () => {
   const { data: usersData = [], isPending: userPending } = useQuery({
     queryKey: ["usersData", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`);
+      const res = await axios.get(`http://localhost:5000/users/${user.email}`,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       // console.log(res.data);
       return res.data;
     },
@@ -51,7 +63,11 @@ const ProfileDetails = () => {
 
   const handleAddFavorite = (member) => {
     axios
-      .post("http://localhost:5000/favoriteBiodata", member)
+      .post("http://localhost:5000/favoriteBiodata", member,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      })
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {

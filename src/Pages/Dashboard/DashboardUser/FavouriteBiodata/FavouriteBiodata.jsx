@@ -12,7 +12,11 @@ const FavouriteBiodata = () => {
   } = useQuery({
     queryKey: ["favoriteMember"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/favoriteBiodata");
+      const res = await axios.get("http://localhost:5000/favoriteBiodata",{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       return res.data;
     },
   });
@@ -29,7 +33,11 @@ const FavouriteBiodata = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/favoriteBiodata/${id}`)
+          .delete(`http://localhost:5000/favoriteBiodata/${id}`,{
+            headers:{
+              authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+          })
           .then((res) => {
             // console.log(res.data);
             if (res.data.deletedCount > 0) {

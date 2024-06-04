@@ -16,6 +16,8 @@ import ManageUsers from "../Pages/Dashboard/DashboardAdmin/ManageUsers/ManageUse
 import ApprovedPremium from "../Pages/Dashboard/DashboardAdmin/ApprovedPremium/ApprovedPremium";
 import ApprovedContactRequest from "../Pages/Dashboard/DashboardAdmin/ApprovedContactRequest/ApprovedContactRequest";
 import UserHome from "../Pages/Dashboard/DashboardUser/UserHome/UserHome";
+import PrivateAuth from "../PrivateAuth/PrivateAuth";
+import AdminRoute from "../PrivateAuth/AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -27,16 +29,24 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path:'/biodatas',
-        element:<Biodatas></Biodatas>
+        path: "/biodatas",
+        element: <Biodatas></Biodatas>,
       },
       {
-        path:'/profileDetails/:id',
-        element:<ProfileDetails></ProfileDetails>
+        path: "/profileDetails/:id",
+        element: (
+          <PrivateAuth>
+            <ProfileDetails></ProfileDetails>
+          </PrivateAuth>
+        ),
       },
       {
-        path:'/checkout/:id',
-        element:<Checkout></Checkout>
+        path: "/checkout/:id",
+        element: (
+          <PrivateAuth>
+            <Checkout></Checkout>
+          </PrivateAuth>
+        ),
       },
       {
         path: "/login",
@@ -49,49 +59,49 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path:'/dashboard',
-    element:<Dashboard></Dashboard>,
-    children:[
+    path: "/dashboard",
+    element: <PrivateAuth><Dashboard></Dashboard></PrivateAuth>,
+    children: [
       // user dashboard
       {
-        path:'/dashboard/userHome',
-        element:<UserHome></UserHome>
+        path: "/dashboard/userHome",
+        element: <UserHome></UserHome>,
       },
       {
-        path:'/dashboard/editBiodata',
-        element:<EditBiodata></EditBiodata>,
+        path: "/dashboard/editBiodata",
+        element: <EditBiodata></EditBiodata>,
         // loader:()=>fetch('http://localhost:5000/membersCount')
       },
       {
-        path:'/dashboard/viewBiodata',
-        element:<ViewBiodata></ViewBiodata>
+        path: "/dashboard/viewBiodata",
+        element: <ViewBiodata></ViewBiodata>,
       },
       {
-        path:'/dashboard/contactRequest',
-        element:<MyContactRequest></MyContactRequest>
+        path: "/dashboard/contactRequest",
+        element: <MyContactRequest></MyContactRequest>,
       },
       {
-        path:'/dashboard/favoriteBiodata',
-        element:<FavouriteBiodata></FavouriteBiodata>
+        path: "/dashboard/favoriteBiodata",
+        element: <FavouriteBiodata></FavouriteBiodata>,
       },
 
       // admin dashboard
       {
-        path:'/dashboard/adminHome',
-        element:<AdminDashboard></AdminDashboard>
+        path: "/dashboard/adminHome",
+        element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>,
       },
       {
-        path:'/dashboard/manageUsers',
-        element:<ManageUsers></ManageUsers>
+        path: "/dashboard/manageUsers",
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
       },
       {
-        path:'/dashboard/approvedPremium',
-        element:<ApprovedPremium></ApprovedPremium>
+        path: "/dashboard/approvedPremium",
+        element: <AdminRoute><ApprovedPremium></ApprovedPremium></AdminRoute>,
       },
       {
-        path:'/dashboard/approvedContactRequest',
-        element:<ApprovedContactRequest></ApprovedContactRequest>
+        path: "/dashboard/approvedContactRequest",
+        element: <AdminRoute><ApprovedContactRequest></ApprovedContactRequest></AdminRoute>,
       },
-    ]
-  }
+    ],
+  },
 ]);

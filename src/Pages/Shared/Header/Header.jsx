@@ -3,51 +3,47 @@ import logoNav from "../../../assets/Images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  let isAdmin = true;
+  const [isAdmin] = useAdmin();
 
-  const handleLogOut = ()=>{
+  const handleLogOut = () => {
     // setLoading(true);
     logOut()
-    .then(()=>{
-        // 
-        navigate('/login');
-        
-    })
-    .catch(err=>console.log(err.message))
-  }
+      .then(() => {
+        //
+        navigate("/login");
+      })
+      .catch((err) => console.log(err.message));
+  };
 
-//   const menuItem = (
-//     <>
-//       <li>
-//         <NavLink to="/">Home</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/biodatas">Biodatas</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/about">About Us</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/contact">Contact Us</NavLink>
-//       </li>
-//     </>
-//   );
+  //   const menuItem = (
+  //     <>
+  //       <li>
+  //         <NavLink to="/">Home</NavLink>
+  //       </li>
+  //       <li>
+  //         <NavLink to="/biodatas">Biodatas</NavLink>
+  //       </li>
+  //       <li>
+  //         <NavLink to="/about">About Us</NavLink>
+  //       </li>
+  //       <li>
+  //         <NavLink to="/contact">Contact Us</NavLink>
+  //       </li>
+  //     </>
+  //   );
   return (
     <nav className="relative bg-white shadow dark:bg-gray-800">
       <div className="container px-6 py-4 mx-auto">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             <Link className="flex items-center gap-1" to="/">
-              <img
-                className="w-auto h-6 sm:h-7"
-                src={logoNav}
-                alt="Logo"
-              />
+              <img className="w-auto h-6 sm:h-7" src={logoNav} alt="Logo" />
               <h2 className="text-3xl mr-4">LoveNest</h2>
               <span>{user?.email}</span>
             </Link>
@@ -105,75 +101,70 @@ const Header = () => {
           >
             <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
               <Link
-                to='/'
+                to="/"
                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Home
               </Link>
               <Link
-                to='/biodatas'
+                to="/biodatas"
                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Biodatas
               </Link>
               <Link
-                to='/about'
+                to="/about"
                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 About Us
               </Link>
               <Link
-                to='/contact'
+                to="/contact"
                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Contact Us
               </Link>
-              {
-                user && !isAdmin && 
+              {user && !isAdmin && (
                 <Link
-                to='/dashboard/userHome'
-                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                Dashboard
-              </Link>
-              }
-              {
-                user && isAdmin && 
+                  to="/dashboard/userHome"
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Dashboard
+                </Link>
+              )}
+              {user && isAdmin && (
                 <Link
-                to='/dashboard/adminHome'
-                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                Dashboard
-              </Link>
-              }
+                  to="/dashboard/adminHome"
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Dashboard
+                </Link>
+              )}
             </div>
 
             <div className="flex items-center mt-4 lg:mt-0">
-              
-
               <button
                 type="button"
                 className="flex items-center focus:outline-none"
                 aria-label="toggle profile dropdown"
               >
-                {
-                user ?
+                {user ? (
+                  <>
+                    <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                      <img
+                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                        className="object-cover w-full h-full"
+                        alt="avatar"
+                      />
+                    </div>
 
-                <>
-                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                <img
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                    className="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                </div>
-                
-                    <button  onClick={handleLogOut}>SigOut</button>
-                
-                </>
-            :
-            <Link to='/login'><Button>Login</Button>  </Link>  
-            }
+                    <button onClick={handleLogOut}>SigOut</button>
+                  </>
+                ) : (
+                  <Link to="/login">
+                    <Button>Login</Button>{" "}
+                  </Link>
+                )}
                 <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">
                   Khatab wedaa
                 </h3>

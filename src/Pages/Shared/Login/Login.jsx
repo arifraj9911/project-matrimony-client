@@ -2,13 +2,14 @@ import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -26,13 +27,17 @@ const Login = () => {
         };
 
         axios
-          .post("http://localhost:5000/users", userInfo)
+          .post("http://localhost:5000/users", userInfo, {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          })
           .then((res) => {
             console.log(res.data);
           })
           .catch((err) => console.log(err.message));
 
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => console.log(err.message));
   };
@@ -47,12 +52,16 @@ const Login = () => {
         };
 
         axios
-          .post("http://localhost:5000/users", userInfo)
+          .post("http://localhost:5000/users", userInfo, {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          })
           .then((res) => {
             console.log(res.data);
           })
           .catch((err) => console.log(err.message));
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => console.log(err.message));
   };

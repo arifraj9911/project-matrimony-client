@@ -6,7 +6,11 @@ const ApprovedPremium = () => {
   const { data: premiumRequest, isPending,refetch } = useQuery({
     queryKey: ["premiumRequest"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/premium");
+      const res = await axios.get("http://localhost:5000/premium",{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       console.log(res.data[0]);
       return res.data;
     },

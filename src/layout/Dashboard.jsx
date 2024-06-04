@@ -4,9 +4,17 @@ import { GrDocumentText } from "react-icons/gr";
 import { IoDocumentsOutline } from "react-icons/io5";
 import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  let isAdmin = true;
+  const [isAdmin] = useAdmin();
+
+  console.log(isAdmin);
+
+  // if(isAdminLoading){
+  //   return <p>Loading...</p>
+  // }
+
   return (
     <div className="flex gap-6">
       <div className="w-96 bg-[#FFF5E0] min-h-screen text-center">

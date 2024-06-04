@@ -12,7 +12,11 @@ const MyContactRequest = () => {
   } = useQuery({
     queryKey: ["myRequest"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/myRequestContact");
+      const res = await axios.get("http://localhost:5000/myRequestContact",{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       return res.data;
     },
   });
@@ -29,7 +33,11 @@ const MyContactRequest = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/myRequestContact/${id}`)
+          .delete(`http://localhost:5000/myRequestContact/${id}`,{
+            headers:{
+              authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+          })
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire({

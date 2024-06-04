@@ -17,7 +17,11 @@ const ViewBiodata = () => {
     queryKey: ["viewMembers", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/initialAllMembers/${user.email}`
+        `http://localhost:5000/initialAllMembers/${user.email}`,{
+          headers:{
+            authorization:`Bearer ${localStorage.getItem('access_token')}`
+          }
+        }
       );
       // console.log(res.data[0]);
       return res.data;

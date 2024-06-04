@@ -30,7 +30,11 @@ const EditBiodata = () => {
   } = useQuery({
     queryKey: ["count"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/membersCount");
+      const res = await axios.get("http://localhost:5000/membersCount",{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       return res.data;
     },
   });
@@ -116,7 +120,11 @@ const EditBiodata = () => {
         // console.log(profileBiodata);
 
         axios
-          .post("http://localhost:5000/members", profileBiodata)
+          .post("http://localhost:5000/members", profileBiodata,{
+            headers:{
+              authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+          })
           .then((res) => {
             console.log("profile added", res.data);
             if (res.data.insertedId) {

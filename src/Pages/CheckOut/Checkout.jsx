@@ -28,7 +28,11 @@ const Checkout = () => {
   } = useQuery({
     queryKey: ["contactRequest"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/contactRequest/${id}`);
+      const res = await axios.get(`http://localhost:5000/contactRequest/${id}`,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
       // console.log(res.data)
       return res.data;
     },
@@ -40,7 +44,7 @@ const Checkout = () => {
     // e.preventDefault();
 
     axios
-      .post("http://localhost:5000/contactRequestSend", contactRequest)
+      .post("http://localhost:5000/contactRequestSend", contactRequest,)
       .then((res) => {
         // console.log(res.data);
         refetch();
