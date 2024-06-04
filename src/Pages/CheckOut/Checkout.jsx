@@ -97,6 +97,7 @@ const Checkout = () => {
         <div className="my-4">
           <Elements stripe={stripePromise}>
             <PaymentCheckout
+            id={id}
               setPaymentSuccess={setPaymentSuccess}
               setTransactionId={setTransactionId}
               transactionId={transactionId}

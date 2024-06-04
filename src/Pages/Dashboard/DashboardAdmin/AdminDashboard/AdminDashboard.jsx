@@ -32,7 +32,7 @@ const AdminDashboard = () => {
           <p>Premium Biodata Count: {biodataCount?.premiumBiodata}</p>
         </div>
         <div className="border p-4 shadow-sm">
-          <p>Total Revenue</p>
+          <p>Total Revenue: ${biodataCount?.revenue}</p>
         </div>
       </div>
     </div>

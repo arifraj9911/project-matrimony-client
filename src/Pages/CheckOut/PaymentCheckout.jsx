@@ -3,10 +3,15 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 
-const PaymentCheckout = ({setPaymentSuccess,transactionId,setTransactionId}) => {
+const PaymentCheckout = ({
+  setPaymentSuccess,
+  transactionId,
+  setTransactionId,
+  id,
+}) => {
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState("");
-//   const [transactionId, setTransactionId] = useState("");
+  //   const [transactionId, setTransactionId] = useState("");
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -72,6 +77,18 @@ const PaymentCheckout = ({setPaymentSuccess,transactionId,setTransactionId}) => 
         setTransactionId(paymentIntent.id);
         setPaymentSuccess(true);
         elements.getElement(CardElement).clear();
+
+        // payment info send to the database
+        const payments = {
+          biodata_id: id,
+          price: price,
+          email: user?.email,
+          transactionId: paymentIntent.id,
+        };
+
+        axios.post("http://localhost:5000/payments", payments).then((res) => {
+          console.log(res.data);
+        });
       }
     }
   };
@@ -97,9 +114,9 @@ const PaymentCheckout = ({setPaymentSuccess,transactionId,setTransactionId}) => 
       <button
         className="bg-cyan-700 text-white py-2 mt-5 rounded-md px-6"
         type="submit"
-        disabled={!stripe || !clientSecret }
+        disabled={!stripe || !clientSecret}
       >
-        Pay 
+        Pay
       </button>
       <p className="text-red-600 mt-2">{error}</p>
       {transactionId && (
