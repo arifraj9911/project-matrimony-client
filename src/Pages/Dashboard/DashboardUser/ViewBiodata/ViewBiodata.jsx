@@ -32,25 +32,16 @@ const ViewBiodata = () => {
 
   // console.log(viewMembers[0]);sa
 
-  if (isPending) {
-    return <p>Loading...</p>;
-  }
+ 
 
   const handleMakePremium = (id) => {
     // console.log(requestPremium,id)
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, update!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // make premium update
-        axios
-          .patch(`http://localhost:5000/initialAllMembers/premium/${id}`)
+    axios
+          .patch(`http://localhost:5000/initialAllMembers/premium/${id}`,{
+            headers:{
+              authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+          })
           .then((res) => {
             console.log(res.data);
             if (res.data.modifiedCount > 0) {
@@ -63,9 +54,42 @@ const ViewBiodata = () => {
             }
           })
           .catch((err) => console.log(err.message));
-      }
-    });
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   text: "You won't be able to revert this!",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Yes, update!",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     // make premium update
+    //     axios
+    //       .patch(`http://localhost:5000/initialAllMembers/premium/${id}`,{
+    //         headers:{
+    //           authorization:`Bearer ${localStorage.getItem('access_token')}`
+    //         }
+    //       })
+    //       .then((res) => {
+    //         console.log(res.data);
+    //         if (res.data.modifiedCount > 0) {
+    //           refetch();
+    //           Swal.fire({
+    //             title: "Successfully Update!",
+    //             text: `${viewMembers[0]?.name} is now premium member`,
+    //             icon: "success",
+    //           });
+    //         }
+    //       })
+    //       .catch((err) => console.log(err.message));
+    //   }
+    // });
   };
+
+  if (isPending) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="w-5/6">
