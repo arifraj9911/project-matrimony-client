@@ -18,6 +18,7 @@ import ApprovedContactRequest from "../Pages/Dashboard/DashboardAdmin/ApprovedCo
 import UserHome from "../Pages/Dashboard/DashboardUser/UserHome/UserHome";
 import PrivateAuth from "../PrivateAuth/PrivateAuth";
 import AdminRoute from "../PrivateAuth/AdminRoute";
+import GotMarried from "../Pages/Dashboard/DashboardUser/GotMarried/GotMarried";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/favoriteBiodata",
         element: <FavouriteBiodata></FavouriteBiodata>,
+      },
+      {
+        path:"/dashboard/gotMarried",
+        element:<GotMarried></GotMarried>
       },
 
       // admin dashboard
