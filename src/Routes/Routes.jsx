@@ -19,6 +19,7 @@ import UserHome from "../Pages/Dashboard/DashboardUser/UserHome/UserHome";
 import PrivateAuth from "../PrivateAuth/PrivateAuth";
 import AdminRoute from "../PrivateAuth/AdminRoute";
 import GotMarried from "../Pages/Dashboard/DashboardUser/GotMarried/GotMarried";
+import SuccessStory from "../Pages/Dashboard/DashboardAdmin/SuccessStory/SuccessStory";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
         path: "/dashboard/approvedContactRequest",
         element: <AdminRoute><ApprovedContactRequest></ApprovedContactRequest></AdminRoute>,
       },
+      {
+        path:"/dashboard/successStory",
+        element:<AdminRoute><SuccessStory></SuccessStory></AdminRoute>
+      }
     ],
   },
 ]);

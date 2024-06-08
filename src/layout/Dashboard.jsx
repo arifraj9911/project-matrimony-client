@@ -89,6 +89,12 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li className="flex items-center gap-2 justify-center">
+                  <IoDocumentsOutline />
+                  <NavLink to="/dashboard/successStory">
+                    Success Story
+                  </NavLink>
+                </li>
+                <li className="flex items-center gap-2 justify-center">
                   <CiLogout />
                   <NavLink to="/">Logout</NavLink>
                 </li>
