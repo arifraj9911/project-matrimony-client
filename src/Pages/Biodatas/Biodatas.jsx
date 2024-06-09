@@ -2,27 +2,73 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BiodatasCard from "./BiodatasCard";
 import { Button } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Biodatas = () => {
   const [gender, setGender] = useState(null);
   const [age, setAge] = useState(null);
   const [division, setDivision] = useState(null);
 
-  const { data: allBio = [], isPending } = useQuery({
-    queryKey: ["allBio", gender, age, division],
+  const [count, setCount] = useState(0);
+  // console.log(count);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+
+  const pages = [...Array(numberOfPages).keys()];
+
+  const {
+    data: allBio = [],
+    isPending,
+    refetch,
+  } = useQuery({
+    queryKey: ["allBio", gender, age, division, currentPage, itemsPerPage],
     queryFn: async () => {
       if (gender !== null && age !== null && division !== null) {
         const res = await axios.get(
-          `http://localhost:5000/allMembers?gender=${gender}&age=${age}&division=${division}`
+          `http://localhost:5000/allMembers?gender=${gender}&age=${age}&division=${division}&page=${currentPage}&size=${itemsPerPage}`
         );
         return res.data;
       } else {
-        const res = await axios.get(`http://localhost:5000/initialAllMembers`);
+        const res = await axios.get(
+          `http://localhost:5000/initialAllMembers?page=${currentPage}&size=${itemsPerPage}`
+        );
         return res.data;
       }
     },
   });
+
+  useEffect(() => {
+    fetch("http://localhost:5000/initialAllMembersCount")
+      .then((res) => res.json())
+      .then((data) => {
+        setCount(data.count);
+        refetch();
+      });
+  }, [refetch]);
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    // console.log(val);
+    setItemsPerPage(val);
+    setCurrentPage(0);
+    refetch();
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+    refetch();
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+    refetch();
+  };
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -34,6 +80,7 @@ const Biodatas = () => {
     setGender(form.gender.value);
     setAge(form.age.value);
     setDivision(form.division.value);
+    refetch();
   };
   return (
     <div className="my-20 max-w-screen-xl mx-auto">
@@ -95,6 +142,37 @@ const Biodatas = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="text-center py-20 flex items-center justify-center ">
+        <button className="mr-2  join-item btn " onClick={handlePrevPage}>
+          Prev
+        </button>
+        {pages.map((page) => (
+          <button
+            className={`${
+              currentPage === page ? "bg-[#FF9F66]" : undefined
+            } mx-3  px-5 py-1 join-item btn`}
+            onClick={() => setCurrentPage(page)}
+            key={page}
+          >
+            {page}
+          </button>
+        ))}
+        <button className="ml-2 join-item btn" onClick={handleNextPage}>
+          Next
+        </button>
+        <select
+          className="join-item btn ml-8 px-2 py-1"
+          value={itemsPerPage}
+          onChange={handleItemsPerPage}
+          name=""
+          id=""
+        >
+          <option value="3">3</option>
+          <option value="6">6</option>
+          <option value="9">9</option>
+          <option value="12">12</option>
+        </select>
       </div>
     </div>
   );
