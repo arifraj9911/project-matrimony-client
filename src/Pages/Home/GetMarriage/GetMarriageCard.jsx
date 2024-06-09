@@ -1,0 +1,26 @@
+const GetMarriageCard = ({ story }) => {
+  const { coupleImage, sharedFeelings } = story;
+  return (
+    <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <img
+        className="object-cover w-full h-64"
+        src={coupleImage}
+        alt="Article"
+      />
+
+      <div className="p-6">
+        <div>
+          <div className="flex justify-between">
+            <p>Marriage Date: 8-11-2022</p>
+            <p>Review: 5</p>
+          </div>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            {sharedFeelings}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GetMarriageCard;
