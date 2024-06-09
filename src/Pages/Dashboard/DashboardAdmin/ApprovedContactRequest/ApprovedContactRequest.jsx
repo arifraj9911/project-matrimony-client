@@ -10,7 +10,7 @@ const ApprovedContactRequest = () => {
   } = useQuery({
     queryKey: ["approvedContact"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/myRequestContact", {
+      const res = await axios.get("http://localhost:5000/approveRequestContact", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

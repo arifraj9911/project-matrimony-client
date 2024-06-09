@@ -5,15 +5,33 @@ import { IoDocumentsOutline } from "react-icons/io5";
 import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Dashboard = () => {
+  const {user} = useContext(AuthContext);
   const [isAdmin] = useAdmin();
 
-  console.log(isAdmin);
+  const { data: userStatus = [], isPending } = useQuery({
+    queryKey: ["usersData", user?.email],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:5000/users/${user.email}`,{
+        headers:{
+          authorization:`Bearer ${localStorage.getItem('access_token')}`
+        }
+      });
+      // console.log(res.data);
+      return res.data;
+    },
+  });
 
-  // if(isAdminLoading){
-  //   return <p>Loading...</p>
-  // }
+  console.log(userStatus);
+
+  if(isPending){
+    return <p>Loading...</p>
+  }
 
   return (
     <div className="flex gap-6">
@@ -40,12 +58,15 @@ const Dashboard = () => {
                   <GrDocumentText />
                   <NavLink to="/dashboard/viewBiodata">View Biodata</NavLink>
                 </li>
-                <li className="flex items-center gap-2 justify-center">
+                {
+                  userStatus?.status !== 'premium' && <li className="flex items-center gap-2 justify-center">
                   <RiContactsBook3Line />
                   <NavLink to="/dashboard/contactRequest">
                     My Contact Request
                   </NavLink>
                 </li>
+                }
+                
                 <li className="flex items-center gap-2 justify-center">
                   <IoDocumentsOutline />
                   <NavLink to="/dashboard/favoriteBiodata">

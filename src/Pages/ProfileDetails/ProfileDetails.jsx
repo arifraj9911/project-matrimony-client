@@ -61,6 +61,8 @@ const ProfileDetails = () => {
     return <p>Loading...</p>;
   }
 
+  // console.log(usersData)
+
   const handleAddFavorite = (member) => {
     axios
       .post("http://localhost:5000/favoriteBiodata", member,{
@@ -138,11 +140,14 @@ const ProfileDetails = () => {
             )}
           </div>
           <div className="flex gap-6 mt-10">
-            <Link to="">
+            {
+              usersData?.role !== 'admin' && <Link to="">
               <Button onClick={() => handleAddFavorite(member)}>
                 Add to Favorite
               </Button>
             </Link>
+            }
+            
             {usersData?.status !== "premium" && (
               <Link to={`/checkout/${biodata_id}`}>
                 <Button>Request Contact Information</Button>
