@@ -18,10 +18,10 @@ const ProfileDetails = () => {
   const { data: member = [], isPending } = useQuery({
     queryKey: ["member", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/members/${id}`,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('access_token')}`
-        }
+      const res = await axios.get(`http://localhost:5000/members/${id}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
       });
       setGender(res.data.biodata_type);
       return res.data;
@@ -33,10 +33,11 @@ const ProfileDetails = () => {
       queryKey: ["similarMember", gender],
       queryFn: async () => {
         const res = await axios.get(
-          `http://localhost:5000/similarMembers?gender=${gender}`,{
-            headers:{
-              authorization:`Bearer ${localStorage.getItem('access_token')}`
-            }
+          `http://localhost:5000/similarMembers?gender=${gender}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
           }
         );
         return res.data;
@@ -46,10 +47,10 @@ const ProfileDetails = () => {
   const { data: usersData = [], isPending: userPending } = useQuery({
     queryKey: ["usersData", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('access_token')}`
-        }
+      const res = await axios.get(`http://localhost:5000/users/${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
       });
       // console.log(res.data);
       return res.data;
@@ -64,10 +65,10 @@ const ProfileDetails = () => {
 
   const handleAddFavorite = (member) => {
     axios
-      .post("http://localhost:5000/favoriteBiodata", member,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('access_token')}`
-        }
+      .post("http://localhost:5000/favoriteBiodata", member, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
       })
       .then((res) => {
         // console.log(res.data);
@@ -85,7 +86,14 @@ const ProfileDetails = () => {
     permanent_division_name,
     age,
     occupation,
-    father_name,mother_name,present_division_name,race,height,weight,date_of_birth,name
+    father_name,
+    mother_name,
+    present_division_name,
+    race,
+    height,
+    weight,
+    date_of_birth,
+    name,
   } = member;
 
   // console.log(similarMember);
@@ -93,7 +101,11 @@ const ProfileDetails = () => {
     <div className=" max-w-screen-xl mx-auto my-20">
       <div className="flex gap-6">
         <div className="w-1/2">
-          <img className="w-full h-[550px] rounded-lg" src={profile_image} alt="" />
+          <img
+            className="w-full h-[600px] rounded-lg"
+            src={profile_image}
+            alt=""
+          />
         </div>
         <div className="w-1/2 ">
           <h4 className="text-sm font-normal mb-1">Bio ID: {biodata_id}</h4>
@@ -124,7 +136,7 @@ const ProfileDetails = () => {
               <span>Weight: {weight}</span>
               <span>Date Of Birth: {date_of_birth}</span>
             </div>
-            <hr className="my-4"/>
+            <hr className="my-4" />
             <div className="flex flex-col gap-2">
               <span>Fathers Name: {father_name}</span>
               <span>Mothers Name: {mother_name}</span>
@@ -132,7 +144,7 @@ const ProfileDetails = () => {
               <span>Race: {race}</span>
             </div>
           </div>
-          <hr className="my-4"/>
+          <hr className="my-4" />
           <div>
             {usersData?.status === "premium" && (
               <p className="flex flex-col font-semibold gap-3">
@@ -147,22 +159,23 @@ const ProfileDetails = () => {
               </p>
             )}
           </div>
-          <div className="flex gap-6 mt-6">
-            {
-              usersData?.role !== 'admin' && <Link to="">
-                <button onClick={() => handleAddFavorite(member)} className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
-                Add to Favorite
-              </button>
-              
-            </Link>
-            }
-            
+          <div className="flex gap-6 mt-3">
+            {usersData?.role !== "admin" && (
+              <Link to="">
+                <button
+                  onClick={() => handleAddFavorite(member)}
+                  className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto "
+                >
+                  Add to Favorite
+                </button>
+              </Link>
+            )}
+
             {usersData?.status !== "premium" && (
               <Link to={`/checkout/${biodata_id}`}>
                 <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
-                Request Contact Information
-              </button>
-                
+                  Request Contact Information
+                </button>
               </Link>
             )}
           </div>

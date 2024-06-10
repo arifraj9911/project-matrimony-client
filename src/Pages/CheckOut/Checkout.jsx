@@ -28,11 +28,14 @@ const Checkout = () => {
   } = useQuery({
     queryKey: ["contactRequest"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/contactRequest/${id}`,{
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('access_token')}`
+      const res = await axios.get(
+        `http://localhost:5000/contactRequest/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
         }
-      });
+      );
       // console.log(res.data)
       return res.data;
     },
@@ -44,7 +47,7 @@ const Checkout = () => {
     // e.preventDefault();
 
     axios
-      .post("http://localhost:5000/contactRequestSend", contactRequest,)
+      .post("http://localhost:5000/contactRequestSend", contactRequest)
       .then((res) => {
         // console.log(res.data);
         refetch();
@@ -101,7 +104,7 @@ const Checkout = () => {
         <div className="my-4">
           <Elements stripe={stripePromise}>
             <PaymentCheckout
-            id={id}
+              id={id}
               setPaymentSuccess={setPaymentSuccess}
               setTransactionId={setTransactionId}
               transactionId={transactionId}
@@ -113,6 +116,7 @@ const Checkout = () => {
           onClick={handleContactRequest}
           disabled={paymentSuccess === false}
           type="submit"
+          className="w-full px-3 py-1 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto "
         >
           Submit
         </Button>

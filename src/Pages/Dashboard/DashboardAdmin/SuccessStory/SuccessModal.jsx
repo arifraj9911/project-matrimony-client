@@ -16,7 +16,7 @@ const SuccessModal = ({ openModal, setOpenModal, specificStory }) => {
             <div>
               <div className="flex gap-6">
                 <p className="text-lg font-semibold">
-                  Female Biodata ID: {selfBioId}
+                  Male Biodata ID: {selfBioId}
                 </p>
                 <p className="text-lg font-semibold">
                   Female Biodata ID: {partnerBioId}

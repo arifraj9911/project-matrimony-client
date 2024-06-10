@@ -21,22 +21,7 @@ const Header = () => {
       .catch((err) => console.log(err.message));
   };
 
-  //   const menuItem = (
-  //     <>
-  //       <li>
-  //         <NavLink to="/">Home</NavLink>
-  //       </li>
-  //       <li>
-  //         <NavLink to="/biodatas">Biodatas</NavLink>
-  //       </li>
-  //       <li>
-  //         <NavLink to="/about">About Us</NavLink>
-  //       </li>
-  //       <li>
-  //         <NavLink to="/contact">Contact Us</NavLink>
-  //       </li>
-  //     </>
-  //   );
+
   return (
     <nav className="relative bg-white shadow dark:bg-gray-800">
       <div className="container px-6 py-4 mx-auto">

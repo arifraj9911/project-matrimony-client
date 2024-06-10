@@ -112,12 +112,19 @@ const PaymentCheckout = ({
         }}
       />
       <button
+        type="submit"
+        disabled={!stripe || !clientSecret}
+        className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-blue-800 rounded-lg lg:w-auto "
+      >
+        pay
+      </button>
+      {/* <button
         className="bg-cyan-700 text-white py-2 mt-5 rounded-md px-6"
         type="submit"
         disabled={!stripe || !clientSecret}
       >
         Pay
-      </button>
+      </button> */}
       <p className="text-red-600 mt-2">{error}</p>
       {transactionId && (
         <p className="text-green-600 mt-2">Transaction ID: {transactionId}</p>

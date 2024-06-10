@@ -107,10 +107,11 @@ const ManageUsers = () => {
             className="py-2 px-3 border border-gray-200 rounded-lg rounded-r-none"
             placeholder="username..."
           />
+          
           <Button
             onClick={handleSearchUser}
             size="sm"
-            className="rounded-l-none"
+            className="rounded-l-none bg-primary"
           >
             Search
           </Button>
@@ -139,7 +140,7 @@ const ManageUsers = () => {
                   {user?.role === "admin" ? (
                     "Admin"
                   ) : (
-                    <Button onClick={() => handleMakeAdmin(user)}>
+                    <Button className="bg-primary" onClick={() => handleMakeAdmin(user)}>
                       Make Admin
                     </Button>
                   )}
@@ -148,7 +149,7 @@ const ManageUsers = () => {
                   {user?.status === "premium" ? (
                     "Premium"
                   ) : (
-                    <Button onClick={() => handleMakePremium(user)}>
+                    <Button className="bg-primary" onClick={() => handleMakePremium(user)}>
                       Make Premium
                     </Button>
                   )}

@@ -3,15 +3,16 @@ import { FiEdit } from "react-icons/fi";
 import { GrDocumentText } from "react-icons/gr";
 import { IoDocumentsOutline } from "react-icons/io5";
 import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import logoNav from "../assets/Images/logo2.png";
 
 const Dashboard = () => {
-  const {user} = useContext(AuthContext);
+  const {user,logOut} = useContext(AuthContext);
   const [isAdmin] = useAdmin();
 
   const { data: userStatus = [], isPending } = useQuery({
@@ -37,8 +38,13 @@ const Dashboard = () => {
     <div className="flex gap-6">
       <div className="w-96 bg-[#FFF5E0] min-h-screen text-center">
         <div className="mb-16  font-bold w-3/4 mx-auto flex flex-col  items-start mt-12">
-          <h2 className="text-3xl uppercase mb-2">Love Nest</h2>
-          <p className="font-normal">Find your soulmate</p>
+        <Link className="flex items-center gap-1" to="/">
+              <img className="w-auto h-8 sm:h-7" src={logoNav} alt="Logo" />
+              <h2 className="text-3xl mr-4 font-bold">
+                Love<span className="text-primary">NEST</span>
+              </h2>
+            </Link>
+            <p className="font-normal mt-2">Find your soulmate</p>
           <ul className="space-y-5  uppercase font-semibold w-full mt-8  flex flex-col items-start">
             {!isAdmin ? (
               <>
@@ -79,9 +85,9 @@ const Dashboard = () => {
                     Got Married
                   </NavLink>
                 </li>
-                <li className="flex items-center gap-2 justify-center">
+                <li onClick={()=>logOut()} className="flex items-center gap-2 justify-center">
                   <CiLogout />
-                  <NavLink to="/">Logout</NavLink>
+                  <NavLink to="/login">Logout</NavLink>
                 </li>
               </>
             ) : (
@@ -115,9 +121,9 @@ const Dashboard = () => {
                     Success Story
                   </NavLink>
                 </li>
-                <li className="flex items-center gap-2 justify-center">
+                <li onClick={()=>logOut()} className="flex items-center gap-2 justify-center">
                   <CiLogout />
-                  <NavLink to="/">Logout</NavLink>
+                  <NavLink to="/login">Logout</NavLink>
                 </li>
               </>
             )}

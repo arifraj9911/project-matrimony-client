@@ -59,7 +59,7 @@ const ApprovedContactRequest = () => {
                   {request?.status === "approved" ? (
                     "Approved"
                   ) : (
-                    <Button
+                    <Button className="bg-primary"
                       onClick={() => handleApprovedRequest(request.biodata_id)}
                     >
                       Request Contact

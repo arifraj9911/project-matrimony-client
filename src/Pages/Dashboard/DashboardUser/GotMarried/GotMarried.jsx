@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button, FileInput, Label, TextInput, Textarea } from "flowbite-react";
+import {  FileInput, Label, TextInput, Textarea } from "flowbite-react";
 
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -113,7 +113,9 @@ const GotMarried = () => {
           />
         </div>
         <div>
-          <Button type="submit">Submit</Button>
+        <button type="submit" className="w-full px-5 py-2  text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+                Submit
+              </button>
         </div>
       </form>
     </div>

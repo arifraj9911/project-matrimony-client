@@ -1,5 +1,5 @@
 import {
-  Button,
+  
   Datepicker,
   FileInput,
   Label,
@@ -414,9 +414,10 @@ const EditBiodata = () => {
         <hr className="my-10 h-[6px] bg-black" />
 
         <div>
-          <Button type="submit" className="w-full">
-            Save and Publish
-          </Button>
+        <button type="submit" className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+        Save and Publish
+              </button>
+          
         </div>
       </form>
     </div>

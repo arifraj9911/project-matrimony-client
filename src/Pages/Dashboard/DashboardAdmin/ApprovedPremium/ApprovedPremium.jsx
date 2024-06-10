@@ -53,7 +53,7 @@ const ApprovedPremium = () => {
                 <Table.Cell>{request.email}</Table.Cell>
                 <Table.Cell>
                     {
-                        request?.status === 'premium' ? 'Premium Member' : <Button onClick={()=>handlePremium(request.biodata_id)}>Premium Request</Button>
+                        request?.status === 'premium' ? 'Premium Member' : <Button className="bg-primary" onClick={()=>handlePremium(request.biodata_id)}>Premium Request</Button>
                     }
                   
                 </Table.Cell>

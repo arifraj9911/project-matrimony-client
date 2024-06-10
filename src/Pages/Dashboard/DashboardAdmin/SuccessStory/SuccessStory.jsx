@@ -6,7 +6,7 @@ import SuccessModal from "./SuccessModal";
 
 const SuccessStory = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [specificStory,setSpecificStory] = useState({})
+  const [specificStory, setSpecificStory] = useState({});
   const { data: successStory = [], isPending } = useQuery({
     queryKey: ["successStory"],
     queryFn: async () => {
@@ -15,14 +15,13 @@ const SuccessStory = () => {
     },
   });
 
-  const handleSuccessModal = (id)=>{
+  const handleSuccessModal = (id) => {
     // console.log(id);
 
     fetch(`http://localhost:5000/successStory/${id}`)
-    .then(res=>res.json())
-    .then(data=>setSpecificStory(data))
-
-  }
+      .then((res) => res.json())
+      .then((data) => setSpecificStory(data));
+  };
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -46,20 +45,26 @@ const SuccessStory = () => {
                 <Table.Cell>{success?.partnerBioId}</Table.Cell>
                 <Table.Cell>{success?.selfBioId}</Table.Cell>
                 <Table.Cell>
-                  <Button onClick={() => {
-                    
-                    setOpenModal(true)
-                    handleSuccessModal(success._id)
-                    }}>View Story</Button>
+                  <Button
+                    className="bg-primary"
+                    onClick={() => {
+                      setOpenModal(true);
+                      handleSuccessModal(success._id);
+                    }}
+                  >
+                    View Story
+                  </Button>
                 </Table.Cell>
-
-               
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
       </div>
-     <SuccessModal openModal={openModal} setOpenModal={setOpenModal} specificStory={specificStory}></SuccessModal>
+      <SuccessModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        specificStory={specificStory}
+      ></SuccessModal>
     </div>
   );
 };

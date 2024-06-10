@@ -1,9 +1,16 @@
 
 
+import userHomeBanner from '../../../../assets/Images/welcome1.png'
+
+
 const UserHome = () => {
+    
     return (
         <div>
-            <h2>Welcome Mr. X</h2>
+            <h2 className="text-3xl">Welcome to Love NEST </h2>
+            <div className="mt-8">
+                <img className="w-3/4 mx-auto" src={userHomeBanner} alt="" />
+            </div>
         </div>
     );
 };
