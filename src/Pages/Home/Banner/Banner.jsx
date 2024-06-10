@@ -1,119 +1,42 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-import { EffectFade, Navigation, Pagination } from "swiper/modules";
-
-// slide photos
-
-import slide1 from "../../../assets/Images/one.jpg";
-import slide2 from "../../../assets/Images/two.jpg";
-import slide3 from "../../../assets/Images/three.jpg";
-import slide4 from "../../../assets/Images/four.jpg";
+import bannerImg from "../../../assets/Images/banner1.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <>
-      <Swiper
-        spaceBetween={30}
-        effect={"fade"}
-        navigation={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[EffectFade, Navigation, Pagination]}
-        className="mySwiper  w-full max-h-screen"
-      >
-        <SwiperSlide className=" ">
-          <div className="flex justify-center  relative w-full text-white text-center">
-            <img className="w-full" src={slide4} />
-            <div className="absolute flex flex-col items-center bg-gradient-to-r  from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full  opacity-50">
-              <div className="w-2/5 space-y-8  mt-60">
-                <h2 className="   text-5xl  ">Soulmates Await</h2>
-                <p>Join Us and Find the One Who Completes You</p>
-                <button
-                  type="button"
-                  className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Find Person
-                </button>
-              </div>
-            </div>
+    <div className="container px-6  mx-auto">
+      <div className="items-center lg:flex">
+        <div className="w-full lg:w-1/2">
+          <div className="lg:max-w-lg">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white lg:text-5xl">
+              <p> Every Heart Finds Its </p>
+              <p className="mt-3">
+                Perfect <span className="text-primary">Soul</span>{" "}
+              </p>
+            </h1>
+
+            <p className="mt-3 text-gray-600 dark:text-gray-400">
+              Discover your soulmate at Love NEST. Connect with genuine,
+              like-minded individuals and embark on your journey to a lifetime
+              of love and happiness.
+            </p>
+
+            <Link to="/biodatas">
+              <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+                Find Now
+              </button>
+            </Link>
           </div>
-        </SwiperSlide>
-        <SwiperSlide className=" ">
-          <div className="flex justify-center  relative w-full text-white text-center">
-            <img className="w-full" src={slide4} />
-            <div className="absolute flex flex-col items-center bg-gradient-to-r  from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full  opacity-50">
-              <div className="w-2/5 space-y-8  mt-60">
-                <h2 className="   text-5xl  ">Soulmates Await</h2>
-                <p>Join Us and Find the One Who Completes You</p>
-                <button
-                  type="button"
-                  className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Find Person
-                </button>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className=" ">
-          <div className="flex justify-center  relative w-full text-white text-center">
-            <img className="w-full" src={slide2} />
-            <div className="absolute flex flex-col items-center bg-gradient-to-r  from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full  opacity-50">
-              <div className="w-2/5 space-y-8  mt-60">
-                <h2 className="   text-5xl  ">Soulmates Await</h2>
-                <p>Join Us and Find the One Who Completes You</p>
-                <button
-                  type="button"
-                  className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Find Person
-                </button>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className=" ">
-          <div className="flex justify-center  relative w-full text-white text-center">
-            <img className="w-full" src={slide3} />
-            <div className="absolute flex flex-col items-center bg-gradient-to-r  from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full  opacity-50">
-              <div className="w-2/5 space-y-8  mt-60">
-                <h2 className="   text-5xl  ">Soulmates Await</h2>
-                <p>Join Us and Find the One Who Completes You</p>
-                <button
-                  type="button"
-                  className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Find Person
-                </button>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className=" ">
-          <div className="flex justify-center  relative w-full text-white text-center">
-            <img className="w-full" src={slide1} />
-            <div className="absolute flex flex-col items-center bg-gradient-to-r  from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full  opacity-50">
-              <div className="w-2/5 space-y-8  mt-60">
-                <h2 className="   text-5xl  ">Soulmates Await</h2>
-                <p>Join Us and Find the One Who Completes You</p>
-                <button
-                  type="button"
-                  className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Find Person
-                </button>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </>
+        </div>
+
+        <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
+          <img
+            className="w-full h-full lg:max-w-3xl"
+            src={bannerImg}
+            alt="Catalogue-pana.svg"
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

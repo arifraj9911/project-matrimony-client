@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {},
+    colors:{
+      'primary':'#800000',
+      'secondary':'#FFD700'
+    }
   },
   plugins: [
     flowbite.plugin(),

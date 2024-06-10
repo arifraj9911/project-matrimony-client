@@ -1,5 +1,5 @@
-import { Button } from "flowbite-react";
-import logoNav from "../../../assets/Images/logo.png";
+
+import logoNav from "../../../assets/Images/logo2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
@@ -43,9 +43,10 @@ const Header = () => {
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             <Link className="flex items-center gap-1" to="/">
-              <img className="w-auto h-6 sm:h-7" src={logoNav} alt="Logo" />
-              <h2 className="text-3xl mr-4">LoveNest</h2>
-              <span>{user?.email}</span>
+              <img className="w-auto h-8 sm:h-7" src={logoNav} alt="Logo" />
+              <h2 className="text-3xl mr-4 font-bold">
+                Love<span className="text-primary">NEST</span>
+              </h2>
             </Link>
 
             {/* Mobile menu button */}
@@ -150,19 +151,24 @@ const Header = () => {
               >
                 {user ? (
                   <>
-                    <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                    <div className="w-8 h-8 overflow-hidden border-2 mr-4 border-gray-400 rounded-full">
                       <img
-                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                        src={user?.photoURL}
                         className="object-cover w-full h-full"
                         alt="avatar"
                       />
                     </div>
-
-                    <button onClick={handleLogOut}>SigOut</button>
+                    
+                    <button  onClick={handleLogOut} className="w-full px-3 py-2  text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+              SignOut
+            </button>
+                    
                   </>
                 ) : (
                   <Link to="/login">
-                    <Button>Login</Button>{" "}
+                    <button className="w-full px-3 py-2  text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+              Login
+            </button>
                   </Link>
                 )}
                 <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">

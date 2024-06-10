@@ -20,11 +20,13 @@ import PrivateAuth from "../PrivateAuth/PrivateAuth";
 import AdminRoute from "../PrivateAuth/AdminRoute";
 import GotMarried from "../Pages/Dashboard/DashboardUser/GotMarried/GotMarried";
 import SuccessStory from "../Pages/Dashboard/DashboardAdmin/SuccessStory/SuccessStory";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -63,6 +65,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateAuth><Dashboard></Dashboard></PrivateAuth>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       // user dashboard
       {
