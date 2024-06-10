@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const PaymentCheckout = ({
   setPaymentSuccess,
@@ -22,10 +23,10 @@ const PaymentCheckout = ({
     axios
       .post(`http://localhost:5000/create-payment-intent`, { price })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        // console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   }, [setClientSecret]);
 
   const handleSubmit = async (event) => {
@@ -48,7 +49,7 @@ const PaymentCheckout = ({
     });
 
     if (error) {
-      console.log("payment error", error);
+      // console.log("payment error", error);
       setError(error.message);
     } else {
       console.log("payment method", paymentMethod);

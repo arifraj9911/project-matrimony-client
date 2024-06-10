@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import RelatedProfileCard from "./RelatedProfileCard";
 import { AuthContext } from "../../provider/AuthProvider";
 import { PacmanLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const ProfileDetails = () => {
   const { user } = useContext(AuthContext);
@@ -74,10 +75,10 @@ const ProfileDetails = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
-          alert("Biodata added in the favorite list");
+          toast.success("Biodata added in the favorite list");
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   const {

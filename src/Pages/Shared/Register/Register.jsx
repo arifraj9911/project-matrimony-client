@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -19,14 +20,14 @@ const Register = () => {
 
         updateUserProfile(data.name, data.photo)
           .then(() => {
-            console.log("user updated");
+            toast.success("user updated");
           })
           .catch((err) => console.log(err.message));
 
         reset();
         navigate("/");
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
   return (
     <div className="py-20 bg-gray-50">

@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { PacmanLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const stripePromise = loadStripe(
   "pk_test_51PLRJ5IIzM9oJ9jxP2Jgraq9LtM8Ok8eCWW78a2ymbYMgs0Uh3mr7hQ6bql7zQcknZuAr9lTuavgdJPWPIWxHVMH00JrDRoZES"
@@ -62,7 +63,7 @@ const Checkout = () => {
           });
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   if (isPending) {

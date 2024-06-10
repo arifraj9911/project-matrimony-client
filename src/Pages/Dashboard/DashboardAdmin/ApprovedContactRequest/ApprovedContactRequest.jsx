@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
+import toast from "react-hot-toast";
 import { PacmanLoader } from "react-spinners";
 
 const ApprovedContactRequest = () => {
@@ -27,7 +28,7 @@ const ApprovedContactRequest = () => {
         console.log(res.data);
         refetch();
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) =>toast.error(err.message));
   };
 
   if (isPending) {

@@ -13,6 +13,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { PacmanLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 // image upload api
 const imageHostingKey = "3951e23defb40e6373eb171e3b8e6b24";
@@ -127,9 +128,9 @@ const EditBiodata = () => {
             }
           })
           .then((res) => {
-            console.log("profile added", res.data);
+            toast.success("profile added");
             if (res.data.insertedId) {
-              alert("profile added successfully");
+              toast.success("profile added successfully");
               refetch();
             } else {
               Swal.fire({
@@ -139,7 +140,7 @@ const EditBiodata = () => {
               });
             }
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => toast.error(err.message));
       });
 
 

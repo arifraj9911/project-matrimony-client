@@ -4,6 +4,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const Login = () => {
 
     signIn(email, password)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
 
         const userInfo = {
           name: res.user?.displayName,
@@ -34,17 +35,17 @@ const Login = () => {
           .then((res) => {
             console.log(res.data);
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => toast.error(err.message));
 
         navigate(location?.state ? location.state : "/");
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         const userInfo = {
           name: res.user?.displayName,
           email: res.user?.email,
@@ -59,10 +60,10 @@ const Login = () => {
           .then((res) => {
             console.log(res.data);
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => toast.error(err.message));
         navigate(location?.state ? location.state : "/");
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   return (

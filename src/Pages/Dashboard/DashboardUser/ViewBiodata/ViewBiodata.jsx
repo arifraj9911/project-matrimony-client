@@ -6,6 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import { PacmanLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const ViewBiodata = () => {
   const { user } = useContext(AuthContext);
@@ -44,7 +45,7 @@ const ViewBiodata = () => {
             }
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.modifiedCount > 0) {
               refetch();
               Swal.fire({
@@ -54,7 +55,7 @@ const ViewBiodata = () => {
               });
             }
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => toast.error(err.message));
  
   };
 

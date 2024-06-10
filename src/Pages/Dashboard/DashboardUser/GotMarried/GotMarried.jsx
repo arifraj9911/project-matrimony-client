@@ -2,6 +2,7 @@ import axios from "axios";
 import {  FileInput, Label, TextInput, Textarea } from "flowbite-react";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const imageHostingKey = "3951e23defb40e6373eb171e3b8e6b24";
@@ -46,9 +47,9 @@ const GotMarried = () => {
             },
           })
           .then((res) => {
-            console.log("added got married data", res.data);
+            // console.log("added got married data", res.data);
             if (res.data.insertedId) {
-              alert("success story added successfully");
+              toast.success("success story added successfully");
             } else {
               Swal.fire({
                 icon: "error",
@@ -57,9 +58,9 @@ const GotMarried = () => {
               });
             }
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => toast.error(err.message));
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   return (
