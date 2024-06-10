@@ -98,8 +98,8 @@ const Biodatas = () => {
                 name="gender"
                 id=""
               >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
             <div className="space-y-2">

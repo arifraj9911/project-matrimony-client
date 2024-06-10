@@ -1,7 +1,7 @@
 import { CiLogout } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
 import { GrDocumentText } from "react-icons/gr";
-import { IoDocumentsOutline } from "react-icons/io5";
+import { IoDocumentsOutline, IoHome } from "react-icons/io5";
 import { RiContactsBook3Line, RiHomeWifiLine } from "react-icons/ri";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
@@ -85,6 +85,13 @@ const Dashboard = () => {
                     Got Married
                   </NavLink>
                 </li>
+                <div className="border-b border-secondary w-full"></div>
+                <li className="flex items-center gap-2 justify-center">
+                  <IoHome />
+                  <NavLink to="/">
+                    Home
+                  </NavLink>
+                </li>
                 <li onClick={()=>logOut()} className="flex items-center gap-2 justify-center">
                   <CiLogout />
                   <NavLink to="/login">Logout</NavLink>
@@ -119,6 +126,13 @@ const Dashboard = () => {
                   <IoDocumentsOutline />
                   <NavLink to="/dashboard/successStory">
                     Success Story
+                  </NavLink>
+                </li>
+                <div className="border-b border-secondary w-full"></div>
+                <li className="flex items-center gap-2 justify-center">
+                  <IoHome />
+                  <NavLink to="/">
+                    Home
                   </NavLink>
                 </li>
                 <li onClick={()=>logOut()} className="flex items-center gap-2 justify-center">

@@ -1,4 +1,3 @@
-import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthProvider";
@@ -67,39 +66,63 @@ const Login = () => {
   };
 
   return (
-    <div className="my-20 ">
-      <div className="w-1/4 mx-auto  mt-40 ">
-        <form
-          className="flex flex-col space-y-6"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <h2 className="text-3xl text-center mb-4">Login</h2>
-          <input
-            className="px-4 py-2 w-full text-gray-700 bg-white border border-gray-200 rounded-md  dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-            placeholder="your email"
-            type="email"
-            {...register("email")}
-          />
-          <input
-            className="px-4 py-2 w-full text-gray-700 bg-white border border-gray-200 rounded-md  dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-            type="password"
-            placeholder="your password"
-            {...register("password")}
-          />
+    <div className="">
+      <div className=" bg-gray-50 py-20">
+        <h2 className="text-2xl text-center mb-8 font-semibold ">
+          Sign in to your account
+        </h2>
+        <div className="w-1/3 mx-auto  p-10 bg-white shadow rounded-md">
+          <form
+            className="flex flex-col space-y-6 "
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <input
+              className="px-4 py-2 w-full text-gray-700 bg-white border border-gray-200   dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              placeholder="your email"
+              type="email"
+              {...register("email")}
+            />
+            <input
+              className="px-4 py-2 w-full text-gray-700 bg-white border border-gray-200   dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              type="password"
+              placeholder="your password"
+              {...register("password")}
+            />
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2">
+                <input type="checkbox" name="" id="" />
+                <span>Remember me</span>
+              </div>
+              <div>
+                <p className="text-blue-500">
+                  <Link to="">Forgotten Password</Link>
+                </p>
+              </div>
+            </div>
 
-          <Button type="submit ">Login</Button>
-        </form>
-        <p className="mt-2">
-          New to account?{" "}
-          <Link to="/register" className="text-blue-500 underline">
-            Register
-          </Link>
-        </p>
-        <hr className="my-4" />
-        <div className="flex  justify-center">
-          <button onClick={handleGoogleLogin}>
-            <FcGoogle className="text-5xl" />
-          </button>
+            <button
+              type="submit"
+              className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform rounded-md bg-primary  lg:w-auto "
+            >
+              Login
+            </button>
+          </form>
+          <p className="mt-4">
+            New to account?{" "}
+            <Link to="/register" className="text-blue-500 underline">
+              Register
+            </Link>
+          </p>
+          <hr className="my-4" />
+          <div className="flex items-center gap-2   justify-center">
+            <button
+              className="flex items-center border mt-4 rounded-md p-2 gap-2"
+              onClick={handleGoogleLogin}
+            >
+              <FcGoogle className="text-3xl" />
+              <span>Google Sign In</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
