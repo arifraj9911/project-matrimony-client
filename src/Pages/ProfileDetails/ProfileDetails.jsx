@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Button } from "flowbite-react";
 import { useContext, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
@@ -86,6 +85,7 @@ const ProfileDetails = () => {
     permanent_division_name,
     age,
     occupation,
+    father_name,mother_name,present_division_name,race,height,weight,date_of_birth,name
   } = member;
 
   // console.log(similarMember);
@@ -93,10 +93,11 @@ const ProfileDetails = () => {
     <div className=" max-w-screen-xl mx-auto my-20">
       <div className="flex gap-6">
         <div className="w-1/2">
-          <img src={profile_image} alt="" />
+          <img className="w-full h-[550px] rounded-lg" src={profile_image} alt="" />
         </div>
         <div className="w-1/2 ">
-          <h2 className="text-3xl">Bio ID: {biodata_id}</h2>
+          <h4 className="text-sm font-normal mb-1">Bio ID: {biodata_id}</h4>
+          <h2 className="text-3xl font-semibold">{name}</h2>
           <div className="flex gap-6 mt-6">
             <div className="flex flex-col shadow p-3 items-center gap-2 ">
               <FaUser className="text-xl"></FaUser>
@@ -116,15 +117,22 @@ const ProfileDetails = () => {
               Occupation: {occupation}
             </div>
           </div>
-          <hr className="my-8" />
-          <p className="mb-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-            dolore nihil rerum. Explicabo, laudantium modi obcaecati nisi
-            repudiandae perferendis in saepe maiores. Nulla id quis magnam earum
-            ipsam saepe pariatur, tempore numquam nesciunt dignissimos
-            consequatur voluptatibus excepturi nisi nam quaerat exercitationem
-            sint ut voluptatum fugiat quibusdam! Iure est deserunt adipisci!
-          </p>
+          <hr className="my-6" />
+          <div>
+            <div className="flex flex-col gap-2">
+              <span>Height: {height}</span>
+              <span>Weight: {weight}</span>
+              <span>Date Of Birth: {date_of_birth}</span>
+            </div>
+            <hr className="my-4"/>
+            <div className="flex flex-col gap-2">
+              <span>Fathers Name: {father_name}</span>
+              <span>Mothers Name: {mother_name}</span>
+              <span>Present Division: {present_division_name}</span>
+              <span>Race: {race}</span>
+            </div>
+          </div>
+          <hr className="my-4"/>
           <div>
             {usersData?.status === "premium" && (
               <p className="flex flex-col font-semibold gap-3">
@@ -139,18 +147,22 @@ const ProfileDetails = () => {
               </p>
             )}
           </div>
-          <div className="flex gap-6 mt-10">
+          <div className="flex gap-6 mt-6">
             {
               usersData?.role !== 'admin' && <Link to="">
-              <Button onClick={() => handleAddFavorite(member)}>
+                <button onClick={() => handleAddFavorite(member)} className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
                 Add to Favorite
-              </Button>
+              </button>
+              
             </Link>
             }
             
             {usersData?.status !== "premium" && (
               <Link to={`/checkout/${biodata_id}`}>
-                <Button>Request Contact Information</Button>
+                <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+                Request Contact Information
+              </button>
+                
               </Link>
             )}
           </div>
