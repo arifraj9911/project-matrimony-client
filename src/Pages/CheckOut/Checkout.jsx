@@ -8,6 +8,7 @@ import PaymentCheckout from "./PaymentCheckout";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { PacmanLoader } from "react-spinners";
 
 const stripePromise = loadStripe(
   "pk_test_51PLRJ5IIzM9oJ9jxP2Jgraq9LtM8Ok8eCWW78a2ymbYMgs0Uh3mr7hQ6bql7zQcknZuAr9lTuavgdJPWPIWxHVMH00JrDRoZES"
@@ -65,7 +66,7 @@ const Checkout = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   return (

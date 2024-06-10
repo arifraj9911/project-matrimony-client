@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { FaUsers, FaMale, FaFemale, FaHeart } from "react-icons/fa";
+import { PacmanLoader } from "react-spinners";
 
 const SuccessMarriage = () => {
   const { data: successCounter = 0, isPending } = useQuery({
@@ -22,7 +23,7 @@ const SuccessMarriage = () => {
   });
 
   if (isPending || successPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   return (

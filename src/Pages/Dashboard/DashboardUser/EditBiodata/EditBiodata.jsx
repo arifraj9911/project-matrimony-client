@@ -12,6 +12,7 @@ import { AuthContext } from "../../../../provider/AuthProvider";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { PacmanLoader } from "react-spinners";
 
 // image upload api
 const imageHostingKey = "3951e23defb40e6373eb171e3b8e6b24";
@@ -141,53 +142,11 @@ const EditBiodata = () => {
           .catch((err) => console.log(err.message));
       });
 
-    // axios.post('http://localhost:5000/',imageHostingAPI,selectedFile,{
-    //   headers:{
-    //     "content-type": "multipart/form-data",
-    //   }
-    // })
-    // .then(res=>{
-    //   console.log(res.data)
-    // })
 
-    // const profileBiodata = {
-    //   name,
-    //   email,
-    //   phone,
-    //   biodata_type,
-    //   age,
-    //   date_of_birth,
-    //   occupation,
-    //   height,
-    //   weight,
-    //   father_name,
-    //   mother_name,
-    //   permanent_division_name,
-    //   present_division_name,
-    //   race,
-    //   createdTime,
-    //   biodata_id,
-    //   profile_image:imageUrl,
-    //   expected_age,
-    //   expected_gender,
-    //   expected_height,
-    //   expected_weight,
-    // };
-
-    // axios
-    //   .post("http://localhost:5000/members", profileBiodata)
-    //   .then((res) => {
-    //     console.log("profile added", res.data);
-    //     if (res.data.insertedId) {
-    //       alert("profile added successfully");
-    //       refetch();
-    //     }
-    //   })
-    //   .catch((err) => console.log(err.message));
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   return (

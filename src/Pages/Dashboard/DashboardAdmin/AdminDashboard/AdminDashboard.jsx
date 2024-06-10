@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 // import React, { PureComponent } from 'react';
 import { FaUsers, FaMale, FaFemale, FaCrown, FaMoneyBill } from "react-icons/fa";
+import { PacmanLoader } from "react-spinners";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#81A263"];
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
   ];
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   return (

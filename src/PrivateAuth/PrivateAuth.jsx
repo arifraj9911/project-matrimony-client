@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 
 const PrivateAuth = ({children}) => {
@@ -9,7 +10,7 @@ const PrivateAuth = ({children}) => {
     const location = useLocation();
 
     if(loading){
-        return <p>Loading...</p>
+        return <PacmanLoader color="#36d7b7" />
     }
 
     if(user){

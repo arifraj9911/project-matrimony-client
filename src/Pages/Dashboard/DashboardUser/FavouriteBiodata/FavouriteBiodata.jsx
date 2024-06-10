@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Table } from "flowbite-react";
 import { IoRemoveCircleSharp } from "react-icons/io5";
+import { PacmanLoader } from "react-spinners";
 import Swal from "sweetalert2";
 
 const FavouriteBiodata = () => {
@@ -54,7 +55,7 @@ const FavouriteBiodata = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   return (

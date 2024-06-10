@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BiodatasCard from "./BiodatasCard";
 import { useEffect, useState } from "react";
+import { PacmanLoader } from "react-spinners";
 
 const Biodatas = () => {
   const [gender, setGender] = useState(null);
@@ -70,7 +71,7 @@ const Biodatas = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   const handleSearchProfile = (e) => {

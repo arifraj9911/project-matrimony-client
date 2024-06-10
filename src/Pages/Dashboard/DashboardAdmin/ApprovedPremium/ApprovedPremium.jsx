@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
+import { PacmanLoader } from "react-spinners";
 
 const ApprovedPremium = () => {
   const { data: premiumRequest, isPending,refetch } = useQuery({
@@ -26,7 +27,7 @@ const ApprovedPremium = () => {
   }
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
   return (
     <div>

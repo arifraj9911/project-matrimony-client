@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import { useState } from "react";
 import SuccessModal from "./SuccessModal";
+import { PacmanLoader } from "react-spinners";
 
 const SuccessStory = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -24,7 +25,7 @@ const SuccessStory = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
   return (
     <div>

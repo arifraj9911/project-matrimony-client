@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import GetMarriageCard from "./GetMarriageCard";
+import { PacmanLoader } from "react-spinners";
 
 const GetMarriage = () => {
   const { data: successMarriageStory = [], isPending } = useQuery({
@@ -12,7 +13,7 @@ const GetMarriage = () => {
   });
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
   return (
     <div className="my-20 max-w-screen-xl mx-auto">

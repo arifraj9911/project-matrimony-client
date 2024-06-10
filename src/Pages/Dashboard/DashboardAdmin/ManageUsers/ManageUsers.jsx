@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Button, Table } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
+import { PacmanLoader } from "react-spinners";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
@@ -94,7 +95,7 @@ const ManageUsers = () => {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
   return (
     <div>

@@ -10,6 +10,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import RelatedProfileCard from "./RelatedProfileCard";
 import { AuthContext } from "../../provider/AuthProvider";
+import { PacmanLoader } from "react-spinners";
 
 const ProfileDetails = () => {
   const { user } = useContext(AuthContext);
@@ -58,7 +59,7 @@ const ProfileDetails = () => {
   });
 
   if (isPending || pendingSimilarMember || userPending) {
-    return <p>Loading...</p>;
+    return <PacmanLoader color="#36d7b7" />;
   }
 
   // console.log(usersData)
