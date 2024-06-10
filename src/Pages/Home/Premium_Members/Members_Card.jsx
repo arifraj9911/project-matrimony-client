@@ -10,35 +10,38 @@ const Members_Card = ({ member }) => {
     occupation,
   } = member;
   return (
-    <div className="max-w-sm bg-white border mt-10 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-        <img
-          className="rounded-t-lg h-[300px] w-full"
-          src={profile_image}
-          alt=""
-        />
-      </a>
-      <div className="p-5">
+    <div className=" bg-white border mt-10 border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="p-2 w-full">
+        <img className=" h-[300px] w-full" src={profile_image} alt="" />
+      </div>
+      <div className="p-5 text-left">
         <a href="#">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Bio ID: {biodata_id}
           </h5>
+          <hr className="my-2" />
         </a>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Gender: {biodata_type}
-        </p>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Age: {age}
-        </p>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Permanent Division: {permanent_division_name}
-        </p>
+        <div className="flex justify-between items-center mt-4">
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Gender: {biodata_type}
+          </p>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Age: {age}
+          </p>
+        </div>
+        <hr className="mb-2" />
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           Occupation: {occupation}
         </p>
+        <hr className="my-2" />
+
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          Permanent Division: {permanent_division_name}
+        </p>
+        <hr className="mt-2 mb-6" />
         <Link
           to={`/profileDetails/${biodata_id}`}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary rounded-lg"
         >
           View Profile
           <svg
