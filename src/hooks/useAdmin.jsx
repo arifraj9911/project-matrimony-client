@@ -11,7 +11,7 @@ const useAdmin = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/users/admin/${user.email}`,
+        `https://project-matrimony-server.vercel.app/users/admin/${user.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access_token")}`,

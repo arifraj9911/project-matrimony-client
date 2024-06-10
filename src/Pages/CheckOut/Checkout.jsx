@@ -31,7 +31,7 @@ const Checkout = () => {
     queryKey: ["contactRequest"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/contactRequest/${id}`,
+        `https://project-matrimony-server.vercel.app/contactRequest/${id}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -49,7 +49,7 @@ const Checkout = () => {
     // e.preventDefault();
 
     axios
-      .post("http://localhost:5000/contactRequestSend", contactRequest)
+      .post("https://project-matrimony-server.vercel.app/contactRequestSend", contactRequest)
       .then((res) => {
         // console.log(res.data);
         refetch();

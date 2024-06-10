@@ -11,7 +11,7 @@ const Premium_Members = () => {
     queryKey: ["members", asc],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/members?sort=${asc ? "asc" : "desc"}`
+        `https://project-matrimony-server.vercel.app/members?sort=${asc ? "asc" : "desc"}`
       );
       return res.data;
     },

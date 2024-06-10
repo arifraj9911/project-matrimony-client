@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const { data: biodataCount = {}, isPending } = useQuery({
     queryKey: ["biodataCount"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/admin-stats", {
+      const res = await axios.get("https://project-matrimony-server.vercel.app/admin-stats", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

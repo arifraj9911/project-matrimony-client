@@ -21,7 +21,7 @@ const PaymentCheckout = ({
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/create-payment-intent`, { price })
+      .post(`https://project-matrimony-server.vercel.app/create-payment-intent`, { price })
       .then((res) => {
         // console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
@@ -87,7 +87,7 @@ const PaymentCheckout = ({
           transactionId: paymentIntent.id,
         };
 
-        axios.post("http://localhost:5000/payments", payments).then((res) => {
+        axios.post("https://project-matrimony-server.vercel.app/payments", payments).then((res) => {
           console.log(res.data);
         });
       }

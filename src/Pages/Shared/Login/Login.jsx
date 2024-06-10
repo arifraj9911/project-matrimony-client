@@ -27,7 +27,7 @@ const Login = () => {
         };
 
         axios
-          .post("http://localhost:5000/users", userInfo, {
+          .post("https://project-matrimony-server.vercel.app/users", userInfo, {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },
@@ -52,7 +52,7 @@ const Login = () => {
         };
 
         axios
-          .post("http://localhost:5000/users", userInfo, {
+          .post("https://project-matrimony-server.vercel.app/users", userInfo, {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },

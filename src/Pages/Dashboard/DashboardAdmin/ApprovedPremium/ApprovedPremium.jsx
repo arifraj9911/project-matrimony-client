@@ -8,7 +8,7 @@ const ApprovedPremium = () => {
   const { data: premiumRequest, isPending,refetch } = useQuery({
     queryKey: ["premiumRequest"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/premium",{
+      const res = await axios.get("https://project-matrimony-server.vercel.app/premium",{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }
@@ -19,7 +19,7 @@ const ApprovedPremium = () => {
   });
 
   const handlePremium = (id)=>{
-    axios.put(`http://localhost:5000/premium/${id}`)
+    axios.put(`https://project-matrimony-server.vercel.app/premium/${id}`)
     .then(res=>{
         console.log(res.data);
         refetch();

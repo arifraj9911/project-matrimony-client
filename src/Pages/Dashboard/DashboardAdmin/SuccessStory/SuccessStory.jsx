@@ -11,7 +11,7 @@ const SuccessStory = () => {
   const { data: successStory = [], isPending } = useQuery({
     queryKey: ["successStory"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/successStory");
+      const res = await axios.get("https://project-matrimony-server.vercel.app/successStory");
       return res.data;
     },
   });
@@ -19,7 +19,7 @@ const SuccessStory = () => {
   const handleSuccessModal = (id) => {
     // console.log(id);
 
-    fetch(`http://localhost:5000/successStory/${id}`)
+    fetch(`https://project-matrimony-server.vercel.app/successStory/${id}`)
       .then((res) => res.json())
       .then((data) => setSpecificStory(data));
   };

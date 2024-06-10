@@ -12,23 +12,28 @@ const ApprovedContactRequest = () => {
   } = useQuery({
     queryKey: ["approvedContact"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/approveRequestContact", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://project-matrimony-server.vercel.app/approveRequestContact",
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
       return res.data;
     },
   });
 
   const handleApprovedRequest = (id) => {
     axios
-      .put(`http://localhost:5000/myRequestContact/contactApproval/${id}`)
+      .put(
+        `https://project-matrimony-server.vercel.app/myRequestContact/contactApproval/${id}`
+      )
       .then((res) => {
         console.log(res.data);
         refetch();
       })
-      .catch((err) =>toast.error(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   if (isPending) {
@@ -61,7 +66,8 @@ const ApprovedContactRequest = () => {
                   {request?.status === "approved" ? (
                     "Approved"
                   ) : (
-                    <Button className="bg-primary"
+                    <Button
+                      className="bg-primary"
                       onClick={() => handleApprovedRequest(request.biodata_id)}
                     >
                       Request Contact

@@ -19,7 +19,7 @@ const ViewBiodata = () => {
     queryKey: ["viewMembers", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/initialAllMembers/${user.email}`,{
+        `https://project-matrimony-server.vercel.app/initialAllMembers/${user.email}`,{
           headers:{
             authorization:`Bearer ${localStorage.getItem('access_token')}`
           }
@@ -39,7 +39,7 @@ const ViewBiodata = () => {
   const handleMakePremium = (id) => {
     // console.log(requestPremium,id)
     axios
-          .patch(`http://localhost:5000/initialAllMembers/premium/${id}`,{
+          .patch(`https://project-matrimony-server.vercel.app/initialAllMembers/premium/${id}`,{
             headers:{
               authorization:`Bearer ${localStorage.getItem('access_token')}`
             }

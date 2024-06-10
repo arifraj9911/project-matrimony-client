@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
         const userInfo = { email: currentUser.email };
 
         axios
-          .post("http://localhost:5000/jwt", userInfo, {
+          .post("https://project-matrimony-server.vercel.app/jwt", userInfo, {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },

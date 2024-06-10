@@ -7,7 +7,7 @@ const GetMarriage = () => {
   const { data: successMarriageStory = [], isPending } = useQuery({
     queryKey: ["successStory"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/successStory");
+      const res = await axios.get("https://project-matrimony-server.vercel.app/successStory");
       return res.data;
     },
   });

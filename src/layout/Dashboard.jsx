@@ -18,7 +18,7 @@ const Dashboard = () => {
   const { data: userStatus = [], isPending } = useQuery({
     queryKey: ["usersData", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`,{
+      const res = await axios.get(`https://project-matrimony-server.vercel.app/users/${user.email}`,{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }

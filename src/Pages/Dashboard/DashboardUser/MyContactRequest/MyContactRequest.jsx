@@ -13,7 +13,7 @@ const MyContactRequest = () => {
   } = useQuery({
     queryKey: ["myRequest"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/myRequestContact",{
+      const res = await axios.get("https://project-matrimony-server.vercel.app/myRequestContact",{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }
@@ -34,7 +34,7 @@ const MyContactRequest = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/myRequestContact/${id}`,{
+          .delete(`https://project-matrimony-server.vercel.app/myRequestContact/${id}`,{
             headers:{
               authorization:`Bearer ${localStorage.getItem('access_token')}`
             }

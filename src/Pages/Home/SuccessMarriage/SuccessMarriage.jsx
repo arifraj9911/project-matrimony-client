@@ -8,7 +8,7 @@ const SuccessMarriage = () => {
   const { data: successCounter = 0, isPending } = useQuery({
     queryKey: ["successCounter"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/successCounter");
+      const res = await axios.get("https://project-matrimony-server.vercel.app/successCounter");
       console.log(res.data);
       return res.data;
     },
@@ -17,7 +17,7 @@ const SuccessMarriage = () => {
   const { data: getMarried = [], isPending: successPending } = useQuery({
     queryKey: ["successStory"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/successStory");
+      const res = await axios.get("https://project-matrimony-server.vercel.app/successStory");
       return res.data;
     },
   });

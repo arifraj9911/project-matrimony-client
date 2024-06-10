@@ -27,12 +27,12 @@ const Biodatas = () => {
     queryFn: async () => {
       if (gender !== null && age !== null && division !== null) {
         const res = await axios.get(
-          `http://localhost:5000/allMembers?gender=${gender}&age=${age}&division=${division}&page=${currentPage}&size=${itemsPerPage}`
+          `https://project-matrimony-server.vercel.app/allMembers?gender=${gender}&age=${age}&division=${division}&page=${currentPage}&size=${itemsPerPage}`
         );
         return res.data;
       } else {
         const res = await axios.get(
-          `http://localhost:5000/initialAllMembers?page=${currentPage}&size=${itemsPerPage}`
+          `https://project-matrimony-server.vercel.app/initialAllMembers?page=${currentPage}&size=${itemsPerPage}`
         );
         return res.data;
       }
@@ -40,7 +40,7 @@ const Biodatas = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/initialAllMembersCount")
+    fetch("https://project-matrimony-server.vercel.app/initialAllMembersCount")
       .then((res) => res.json())
       .then((data) => {
         setCount(data.count);

@@ -20,7 +20,7 @@ const ProfileDetails = () => {
   const { data: member = [], isPending } = useQuery({
     queryKey: ["member", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/members/${id}`, {
+      const res = await axios.get(`https://project-matrimony-server.vercel.app/members/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -35,7 +35,7 @@ const ProfileDetails = () => {
       queryKey: ["similarMember", gender],
       queryFn: async () => {
         const res = await axios.get(
-          `http://localhost:5000/similarMembers?gender=${gender}`,
+          `https://project-matrimony-server.vercel.app/similarMembers?gender=${gender}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -49,7 +49,7 @@ const ProfileDetails = () => {
   const { data: usersData = [], isPending: userPending } = useQuery({
     queryKey: ["usersData", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/users/${user.email}`, {
+      const res = await axios.get(`https://project-matrimony-server.vercel.app/users/${user.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -67,7 +67,7 @@ const ProfileDetails = () => {
 
   const handleAddFavorite = (member) => {
     axios
-      .post("http://localhost:5000/favoriteBiodata", member, {
+      .post("https://project-matrimony-server.vercel.app/favoriteBiodata", member, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

@@ -41,7 +41,7 @@ const GotMarried = () => {
         };
 
         axios
-          .post("http://localhost:5000/gotMarried", marriedInfo, {
+          .post("https://project-matrimony-server.vercel.app/gotMarried", marriedInfo, {
             headers: {
               authorization: `Bearer ${localStorage.getItem("access_token")}`,
             },

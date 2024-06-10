@@ -15,7 +15,7 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users",{
+      const res = await axios.get("https://project-matrimony-server.vercel.app/users",{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }
@@ -41,7 +41,7 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/users/admin/${user._id}`)
+          .patch(`https://project-matrimony-server.vercel.app/users/admin/${user._id}`)
           .then((res) => {
             // console.log(res.data);
             refetch();
@@ -69,7 +69,7 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .patch(`http://localhost:5000/users/premium/${user._id}`)
+          .patch(`https://project-matrimony-server.vercel.app/users/premium/${user._id}`)
           .then((res) => {
             refetch();
             if (res.data.modifiedCount > 0) {
@@ -87,7 +87,7 @@ const ManageUsers = () => {
   const handleSearchUser = () => {
     const searchText = searchRef.current.value;
     axios
-      .get(`http://localhost:5000/userSearch?search=${searchText}`)
+      .get(`https://project-matrimony-server.vercel.app/userSearch?search=${searchText}`)
       .then((res) => {
         // console.log(res.data);
         setAllUsers(res.data);

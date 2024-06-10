@@ -32,7 +32,7 @@ const EditBiodata = () => {
   } = useQuery({
     queryKey: ["count"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/membersCount",{
+      const res = await axios.get("https://project-matrimony-server.vercel.app/membersCount",{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }
@@ -122,7 +122,7 @@ const EditBiodata = () => {
         // console.log(profileBiodata);
 
         axios
-          .post("http://localhost:5000/members", profileBiodata,{
+          .post("https://project-matrimony-server.vercel.app/members", profileBiodata,{
             headers:{
               authorization:`Bearer ${localStorage.getItem('access_token')}`
             }

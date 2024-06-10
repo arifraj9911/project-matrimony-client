@@ -13,7 +13,7 @@ const FavouriteBiodata = () => {
   } = useQuery({
     queryKey: ["favoriteMember"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/favoriteBiodata",{
+      const res = await axios.get("https://project-matrimony-server.vercel.app/favoriteBiodata",{
         headers:{
           authorization:`Bearer ${localStorage.getItem('access_token')}`
         }
@@ -34,7 +34,7 @@ const FavouriteBiodata = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/favoriteBiodata/${id}`,{
+          .delete(`https://project-matrimony-server.vercel.app/favoriteBiodata/${id}`,{
             headers:{
               authorization:`Bearer ${localStorage.getItem('access_token')}`
             }
