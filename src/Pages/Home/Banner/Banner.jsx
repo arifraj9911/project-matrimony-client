@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <div className="container px-6  mx-auto">
-      <div className="items-center lg:flex">
-        <div className="w-full lg:w-1/2">
+    <div className="container   mx-auto">
+      <div className="items-center lg:flex lg:justify-between  ">
+        <div className="w-full lg:w-3/5">
           <div className="lg:max-w-lg">
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white lg:text-5xl">
               <p> Every Heart Finds Its </p>
@@ -28,9 +28,9 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
+        <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2 ">
           <img
-            className="w-full h-full lg:max-w-3xl"
+            className="w-full h-full "
             src={bannerImg}
             alt="Catalogue-pana.svg"
           />

@@ -1,4 +1,22 @@
+import { Textarea } from "flowbite-react";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import logoNav from "../../../assets/Images/logo2.png";
+
 const Footer = () => {
+
+  const handleNewsletter = ()=>{
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Newsletter Subscribe Successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+
   return (
     <footer className="bg-white dark:bg-gray-900">
       <div className="container px-6 py-12 mx-auto">
@@ -8,9 +26,10 @@ const Footer = () => {
           </h1>
 
           <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+            <Link
+            onClick={handleNewsletter}
+              to=""
+              className="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-primary rounded-lg gap-x-3 "
             >
               <span>Sign Up Now</span>
 
@@ -28,7 +47,7 @@ const Footer = () => {
                   d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -51,40 +70,19 @@ const Footer = () => {
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Who We Are
+                Biodatas
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Our Philosophy
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
-              Industries
-            </p>
-
-            <div className="flex flex-col items-start mt-5 space-y-2">
-              <a
-                href="#"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
-              >
-                Retail & E-Commerce
+                About Us
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Information Technology
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
-              >
-                Finance & Insurance
+                Contact Us
               </a>
             </div>
           </div>
@@ -99,19 +97,25 @@ const Footer = () => {
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Translation
+                Personalized Matchmaking
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Proofreading & Editing
+                Profile Verification
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Content Creation
+                Premium Membership
+              </a>
+              <a
+                href="#"
+                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+              >
+                Privacy Protection
               </a>
             </div>
           </div>
@@ -126,14 +130,32 @@ const Footer = () => {
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                +880 768 473 4978
+                +880 1637014306
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                info@merakiui.com
+                arif.raj9911@gmail.com
               </a>
+              <div className="flex gap-4 h-8 items-end ">
+              <FaFacebook className="text-2xl"/>
+              <FaTwitter className="text-2xl"/>
+              <FaInstagram className="text-2xl"/>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-semibold text-gray-800 dark:text-white">
+              Queries!!!
+            </p>
+
+            <div className="flex flex-col items-start mt-5 space-y-2">
+            <Textarea id="comment" placeholder="Leave a comment..." required rows={3} />
+            <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white capitalize transition-colors duration-300 transform bg-primary rounded-lg lg:w-auto ">
+                Send
+              </button>
             </div>
           </div>
         </div>
@@ -141,16 +163,15 @@ const Footer = () => {
         <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
         <div className="flex flex-col items-center justify-between sm:flex-row">
-          <a href="#">
-            <img
-              className="w-auto h-7"
-              src="https://merakiui.com/images/full-logo.svg"
-              alt=""
-            />
-          </a>
+        <Link className="flex items-center gap-1" to="/">
+              <img className="w-auto h-8 sm:h-7" src={logoNav} alt="Logo" />
+              <h2 className="text-3xl mr-4 font-bold">
+                Love<span className="text-primary">NEST</span>
+              </h2>
+            </Link>
 
           <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">
-            © Copyright 2021. All Rights Reserved.
+            © Copyright 2024. All Rights Reserved.
           </p>
         </div>
       </div>

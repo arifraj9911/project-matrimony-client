@@ -17,7 +17,8 @@ const Premium_Members = () => {
   });
 
   return (
-    <div className="my-20 max-w-screen-xl mx-auto text-center">
+    <div className="bg-gray-50 p-8">
+      <div className="my-20 max-w-screen-xl mx-auto text-center">
       <div className="">
         <div className="flex-1">
           <h2 className="text-4xl font-bold "> Our Premium Members</h2>
@@ -50,6 +51,7 @@ const Premium_Members = () => {
           <Members_Card key={member.biodata_id} member={member}></Members_Card>
         ))}
       </div>
+    </div>
     </div>
   );
 };

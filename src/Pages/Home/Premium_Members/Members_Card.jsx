@@ -10,7 +10,7 @@ const Members_Card = ({ member }) => {
     occupation,
   } = member;
   return (
-    <div className=" bg-white border mt-10 border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className=" bg-white  mt-10   dark:bg-gray-800 dark:border-gray-700">
       <div className="p-2 w-full">
         <img className=" h-[300px] w-full" src={profile_image} alt="" />
       </div>
